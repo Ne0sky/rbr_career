@@ -41,6 +41,10 @@ const Job = () => {
             <p className='text-lg '> {job.description.salary}</p>
           </div>
           <div className='py-2'>
+            <h2 className='text-xl font-semibold'>Openings</h2>
+            <p className='text-lg '> {job.openings}</p>
+          </div>
+          <div className='py-2'>
             <h2 className='text-xl font-semibold'>Location</h2>
             <p className='text-lg '> {job.location}</p>
           </div>

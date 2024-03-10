@@ -12,6 +12,7 @@ const EditJobForm = (props) => {
     const [requirements, setRequirements] = useState(job.description?.requirements || ''); 
     const [salary, setSalary] = useState(job.description?.salary || ''); 
     const [location, setLocation] = useState(job.location || ''); 
+    const [openings, setOpenings] = useState(job.openings || 0);
     const [type, setType] = useState(job.type || ''); 
     console.log(job);
     const handleSubmit = async (e) => {
@@ -24,6 +25,7 @@ const EditJobForm = (props) => {
             title,
             description: { responsibilities, requirements, salary },
             location,
+            openings,
             type
         };
 
@@ -41,6 +43,7 @@ const EditJobForm = (props) => {
             setRequirements('');
             setSalary('');
             setLocation('');
+            setOpenings(0);
             setType('');
         } catch (error) {
             console.error('Error updating job:', error);
@@ -70,6 +73,10 @@ const EditJobForm = (props) => {
                     <label htmlFor="location" className="block">Location:</label>
                     <input type="text" id="location" value={location} onChange={(e) => setLocation(e.target.value)} required className="w-full border border-gray-300 rounded px-3 py-2" />
                 </div>
+                <div>
+                    <label htmlFor="openings" className="block">Number of Openings</label>
+                    <input type="number" id="openings" value={openings} onChange={(e) => setOpenings(e.target.value)} className="w-full border border-gray-300 rounded px-3 py-2" />
+                    </div>
                 <div>
                     <label htmlFor="type" className="block">Type:</label>
                     <input type="text" id="type" value={type} onChange={(e) => setType(e.target.value)} className="w-full border border-gray-300 rounded px-3 py-2" />

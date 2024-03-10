@@ -73,9 +73,13 @@ const AllJobs = () => {
                             </div>
                         </div>
                         <div className="flex flex-col gap-2 justify-center">
-                            <Link to={`/admin/edit_job/${job._id}`} className="text-white rounded-md bg-blue-500 hover:bg-blue-700 flex items-center gap-1 px-2 py-1">
-                                <FaEdit />Edit
-                            </Link>
+                        <Link
+                        to={`/admin/edit_job`}
+                        className="text-white rounded-md bg-blue-500 hover:bg-blue-700 flex items-center gap-1 px-2 py-1"
+                        state={{ job }}
+                        >
+                        <FaEdit />Edit
+                        </Link>
                             <button onClick={() => handleDelete(job._id)} className="rounded-md bg-rose-500 hover:bg-rose-700 text-white flex items-center gap-1 p-1 ">
                                 <MdDeleteSweep />Delete
                             </button>
