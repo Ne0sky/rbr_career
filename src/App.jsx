@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Careers from './pages/Careers'
-import Admin_panel from './pages/Admin_panel'
+import Job_Applicants from './pages/Job_applicants'
 import Login from './pages/Login'
 import Job from './pages/Job'
 import './App.css'
@@ -24,7 +24,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/admin_login' element={<Login />} />
             <Route path='/careers' element={<Careers />} />
-            <Route path='/admin_panel' element={<Admin_panel />} />
+            <Route path='/admin/job_applicants/:id' element={<Job_Applicants/>} />
             <Route path='/job/:id' element={<Job />} />
             <Route path='/admin/create_job' element={<CreateJobForm />} />
             <Route path='/admin/edit_job' element={<EditJobForm />} />

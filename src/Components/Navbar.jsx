@@ -72,11 +72,9 @@ const Navbar = () => {
         </li>
         {user && (
           <ul className='flex items-center gap-6'>
-          <li>
-          <NavLink to='/admin_panel' className="font-semibold lg:text-xl hover:underline" >Dashboard</NavLink>
-        </li>
+          
         <li>
-              <NavLink to='/admin/create_job' className='font-semibold lg:text-xl hover:underline'>Create Job</NavLink>
+              <NavLink to='/admin/jobs' className='font-semibold lg:text-xl hover:underline'>Jobs</NavLink>
             </li>
         <li>
             <button onClick={handleLogout} className='bg-rose-500 px-4 py-2 text-white rounded' >Logout</button>
