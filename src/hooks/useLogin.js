@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useAuthContext } from "./useAthContext"
+import { useAuthContext } from "./useAuthContext"
 import Cookies from "universal-cookie"
 import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from "react-router-dom"
