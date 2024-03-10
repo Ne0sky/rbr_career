@@ -52,8 +52,12 @@ const Navbar = () => {
               <NavLink to='/admin_panel' className="font-semibold lg:text-xl hover:underline" >Dashboard</NavLink>
             </li>
             <li>
+              <NavLink to='/admin/create_job' className='font-semibold lg:text-xl hover:underline'>Create Job</NavLink>
+            </li>
+            <li>
               <button onClick={handleLogout} className='bg-rose-500 px-4 py-2 text-white rounded' >Logout</button>
             </li>
+            
             </ul>
           )}
         </ul>
@@ -67,11 +71,13 @@ const Navbar = () => {
           <NavLink to='/careers' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Careers</NavLink>
         </li>
         {user && (
-          <ul className='flex items-center gap-4'>
-          
+          <ul className='flex items-center gap-6'>
           <li>
           <NavLink to='/admin_panel' className="font-semibold lg:text-xl hover:underline" >Dashboard</NavLink>
         </li>
+        <li>
+              <NavLink to='/admin/create_job' className='font-semibold lg:text-xl hover:underline'>Create Job</NavLink>
+            </li>
         <li>
             <button onClick={handleLogout} className='bg-rose-500 px-4 py-2 text-white rounded' >Logout</button>
           </li>
