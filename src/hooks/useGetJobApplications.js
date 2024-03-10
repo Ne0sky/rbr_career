@@ -12,13 +12,8 @@ const useGetJobApplications = (jobId) => {
         
     });
     const jobApplications = response.data.data;
-    const jobsApplicationsWithId = jobApplications.map((application, index) => ({
-      id: application._id,
-      ...application,
-    }));
-
-    console.log(jobsApplicationsWithId);
-    return jobsApplicationsWithId;
+    
+    return jobApplications;
   };
 
   return useQuery(['jobApplications', jobId], getJobApplications, {

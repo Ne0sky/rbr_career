@@ -8,14 +8,31 @@ import { MdDeleteSweep } from 'react-icons/md';
 import { CiLocationOn } from "react-icons/ci";
 import { LuClock } from "react-icons/lu";
 import { IoMdCreate } from "react-icons/io";
+import { confirmAlert } from 'react-confirm-alert'; // Import react-confirm-alert
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css for the default styling
 
 const AllJobs = () => {
     const { data: jobs, isLoading, isError, error, refetch } = useJobs();
     const deleteJob = useDeleteJob();
 
-    const handleDelete = async (id) => {
-        await deleteJob(id);
-        refetch();
+    const handleDelete = (id) => {
+        confirmAlert({
+            title: 'Confirm Deletion',
+            message: 'Are you sure you want to delete this job?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: async () => {
+                        await deleteJob(id);
+                        refetch();
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => {}
+                }
+            ]
+        });
     };
 
     if (isLoading) {

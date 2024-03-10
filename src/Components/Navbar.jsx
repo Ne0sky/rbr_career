@@ -68,7 +68,7 @@ const Navbar = () => {
           <NavLink to='/' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Home</NavLink>
         </li>
         <li>
-          <a href='/careers' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Careers</a>
+          <NavLink to='/careers' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Careers</NavLink>
         </li>
         {user && (
           <ul className='flex items-center gap-6'>

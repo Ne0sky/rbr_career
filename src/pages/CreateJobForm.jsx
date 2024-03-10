@@ -9,6 +9,7 @@ const CreateJobForm = () => {
     const [salary, setSalary] = useState('');
     const [location, setLocation] = useState('');
     const [type, setType] = useState('');
+    const [openings, setOpenings] = useState(0);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,6 +21,7 @@ const CreateJobForm = () => {
             title,
             description: { responsibilities, requirements, salary },
             location,
+            openings,
             type
         };
 
@@ -41,6 +43,7 @@ const CreateJobForm = () => {
             setSalary('');
             setLocation('');
             setType('');
+            setOpenings(0);
         } catch (error) {
             console.error('Error creating job:', error);
         }
@@ -68,6 +71,10 @@ const CreateJobForm = () => {
                 <div>
                     <label htmlFor="location" className="block">Location:</label>
                     <input type="text" id="location" value={location} onChange={(e) => setLocation(e.target.value)} required className="w-full border border-gray-300 rounded px-3 py-2" />
+                </div>
+                <div>
+                    <label htmlFor="openings" className="block">Openings:</label>
+                    <input type="number" id="openings" value={openings} onChange={(e) => setOpenings(e.target.value)} className="w-full border border-gray-300 rounded px-3 py-2" />
                 </div>
                 <div>
                     <label htmlFor="type" className="block">Type:</label>

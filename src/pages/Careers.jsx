@@ -27,7 +27,6 @@ const Careers = () => {
     console.log('Applying for job with ID:', id);
     window.open(`/job/${id}`, '_blank');
   };
-  const getRowId = (row) => row._id; 
   return (
     <div className='font-main  flex flex-col w-full  items-center overflow-x-hidden  justify-center'>
       <div className='bg-slate-100  w-full banner text-center overflow-x-hidden space-y-8 py-16'>
@@ -43,11 +42,11 @@ const Careers = () => {
           <p>Error fetching data</p>
         ) : jobs ? (
           console.log(jobs),
-          <DataTable columns={columns} rows={jobs} getRowId={getRowId} />
+          <DataTable columns={columns} rows={jobs} />
         ) : null}
         <div className=' w-full sm:flex md:hidden lg:hidden'>
           {jobs && jobs.map((job) => (
-            <JobCard key={job.id} title={job.title} location={job.location} date={job.date} type={job.type} apply={() => handleApply(job.id)} />
+            <JobCard key={job._id} title={job.title} location={job.location} date={job.date} type={job.type} apply={() => handleApply(job.id)} />
           ))}
         </div>
       </div>
