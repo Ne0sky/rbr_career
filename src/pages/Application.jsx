@@ -14,7 +14,7 @@ const Application = () => {
     const [applicantName, setApplicantName] = useState('');
     const [applicantEmail, setApplicantEmail] = useState('');
     const [applicantPhone, setApplicantPhone] = useState('');
-    const [coverLetter, setCoverLetter] = useState('');
+    const [experience, setExpericience] = useState();
     const [degree, setDegree] = useState('');
     const [institute, setInstitute] = useState('');
     const [qualifications, setQualifications] = useState([]);
@@ -71,7 +71,7 @@ const Application = () => {
         formData.append('applicantName', applicantName);
         formData.append('applicantEmail', applicantEmail);
         formData.append('applicantPhone', applicantPhone);
-        formData.append('coverLetter', coverLetter);
+        formData.append('yearsOfExperience', experience);
         qualifications.forEach((qualification, index) => {
             formData.append(`qualifications[${index}][degree]`, qualification.degree);
             formData.append(`qualifications[${index}][institute]`, qualification.institute);
@@ -93,7 +93,7 @@ const Application = () => {
         setDegree('');
         setInstitute('');
     };
-    
+
     const input_style = "border border-gray-500 rounded px-4 py-2 w-full"
     return (
         <div className='mx-auto w-full flex flex-col font-main items-center justify-center py-12'>
@@ -112,10 +112,9 @@ const Application = () => {
             <div className="mb-4">
                 <TextField className={input_style} type="text" required id="applicantPhone" label='Phone Number' value={applicantPhone} onChange={(e) => setApplicantPhone(e.target.value)} />
             </div>
-            <div className="mb-4">
-                <TextField multiline rows={5}  className={input_style} id="coverLetter" label='Cover Letter'  value={coverLetter} onChange={(e) => setCoverLetter(e.target.value)} />
+            <div>
+                <TextField className={input_style} type="number" required id="experience" label='Years of Experience' value={experience} onChange={(e) => setExpericience(e.target.value)} />
             </div>
-            <div></div>
             <label className="block text-xl font-semibold">Qualifications</label>
             <div className=" flex w-full flex-wrap gap-2">
                 

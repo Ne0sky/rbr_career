@@ -35,7 +35,10 @@ const Applicant = () => {
                 ))
             }
           </div>
-          
+          <div>
+            <h2 className='text-xl font-semibold'>Experience</h2>
+            <p className='text-lg '>{applicant.yearsOfExperience}</p>
+          </div>
           <div>
           <h2 className='text-xl font-semibold'>Resume</h2>
             <Link className='bg-blue-500 p-2 w-36 rounded text-white justify-center flex items-center gap-2' to={applicant.resumeUrl}>Download  <FaFileDownload/></Link>

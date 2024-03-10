@@ -1,20 +1,14 @@
-
-import { useQuery } from 'react-query';
+import { useCallback } from 'react';
+import { useQuery} from 'react-query';
 import axios from 'axios';
 
 const useGetJobs = () => {
-  const getJobs = async () => {
+  const getJobs = useCallback(async () => {
     const response = await axios.get('https://rbrcareers.vercel.app/jobs/allJobs');
     const jobsData = response.data.data;
 
-    // Add id property to each job object
-    const jobsWithId = jobsData.map((job, index) => ({
-      id: job._id,
-      ...job,
-    }));
-    console.log(jobsWithId);
-    return jobsWithId;
-  };
+    return jobsData;
+  }, []);
 
   return useQuery('jobs', getJobs, {
     onError: (error) => {
@@ -24,3 +18,4 @@ const useGetJobs = () => {
 };
 
 export default useGetJobs;
+
