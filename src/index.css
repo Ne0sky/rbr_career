@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar ul .active {
+  color: rgb(220, 169, 1);
+}
+
+body, html {
+  overflow-x: hidden;
+  }
+
+*{
+  box-sizing: border-box;
+}
+
+
