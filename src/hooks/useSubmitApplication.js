@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const useSubmitApplication = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +16,7 @@ const useSubmitApplication = () => {
                 }
             });
             console.log('Application submitted successfully!');
+            toast.success('Application submitted successfully!');
         } catch (error) {
             console.error('Error submitting application:', error);
             setError(error);

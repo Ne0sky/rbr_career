@@ -9,6 +9,7 @@ import './App.css'
 import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
 import Application from './pages/Application'
+import CreateJobForm from './pages/CreateJobForm'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +24,7 @@ function App() {
             <Route path='/careers' element={<Careers />} />
             <Route path='/admin_panel' element={<Admin_panel />} />
             <Route path='/job/:id' element={<Job />} />
+            <Route path='/admin/create_job' element={<CreateJobForm />} />
             <Route path='/apply/:id' element={<Application />} />
           </Routes>
         <Footer/>
