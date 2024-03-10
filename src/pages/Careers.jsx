@@ -13,12 +13,9 @@ const Careers = () => {
 
   // const {getJobs} = useGetJobs();
   const columns = [
-    // { field: 'id', headerName: 'ID', width: 120 },
     { field: 'title', headerName: 'Title', flex: 1 },
     { field: 'location', headerName: 'Location', flex: 1 },
-    // { field: 'Date', headerName: 'Date', flex: 1 },
-    { field: 'Type', headerName: 'Type', flex: 1 },
-    {field: 'description', headerName: 'Description', flex: 1},
+    { field: 'type', headerName: 'Type', flex: 1 },
     {
       field: 'ApplyButton',
       headerName: '',

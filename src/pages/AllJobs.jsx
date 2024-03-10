@@ -50,9 +50,10 @@ const AllJobs = () => {
                             <p className='flex items-center gap-2'><CiLocationOn className='text-xl'/> {job.location}</p>
                             
                             <p className="text-gray-600 flex items-center gap-2"><LuClock/> {new Date(job.postedOn).toLocaleDateString()}</p>
-
+                            <div className='flex items-center gap-4'>
                             <Link to={`/job/${job._id}`} target='_blank' className='bg-zinc-900 text-white py-1 px-2 w-24 text-center text-sm rounded-md'>See More</Link>
-                            <Link to={`/admin/job_applicants/${job._id}`} target='_blank' className='bg-blue-500 text-white py-1 px-2 w-24 text-center text-sm rounded-md'>See Applications</Link>
+                            <Link to={`/admin/job_applicants/${job._id}`} target='_blank' className='bg-blue-500 text-white py-1 px-2 w-36 text-center text-sm rounded-md'>See Applications</Link>
+                            </div>
                         </div>
                         <div className="flex flex-col gap-2 justify-center">
                             <Link to={`/admin/edit_job/${job._id}`} className="text-white rounded-md bg-blue-500 hover:bg-blue-700 flex items-center gap-1 px-2 py-1">

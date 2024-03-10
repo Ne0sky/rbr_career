@@ -1,5 +1,4 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import useGetJobById from '../hooks/useGetJobbyId';
 import { CircularProgress } from '@mui/material';

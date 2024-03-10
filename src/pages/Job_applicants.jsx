@@ -5,6 +5,7 @@ import DataTable from '../Components/DataTable'
 import useGetJobApplications from '../hooks/useGetJobApplications';
 import { Link } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
+
 const Job_Applicants = () => {
   const { id } = useParams();
   const { data: jobApplications, isLoading, isError, error } = useGetJobApplications(id);
@@ -37,13 +38,17 @@ const Job_Applicants = () => {
     },
   ];
   
-  
   const handleLearnMore = (id) => {
     console.log('Applying for job with ID:', id);
-    // window.open(`/job/${id}`, '_blank');
+    window.open(`/admin/applicant/${id}`, '_blank');
   };
+  
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center w-full h-screen">
+                <CircularProgress />
+            </div>
+    )
   }
 
   if (isError) {
@@ -51,38 +56,31 @@ const Job_Applicants = () => {
   }
 
   return (
-    <div className='py-12'>
-      {/* <ul>
-        {jobApplications.map(applicant => (
-          <li key={applicant._id}>
-            <p>Email: {applicant.applicantName}</p>
-            <p>Name: {applicant.applicantEmail}</p>
-            <p>Phone:{applicant.applicantPhone}</p>
-            {applicant.qualifications.map((qualification, index) => (
-              <div key={index}>
-                <p>Degree: {qualification.degree}</p>
-                <p>Institute: {qualification.institute}</p>
+    <div className='py-12 font-main'>
+      <div className='w-full py-8 px-1 flex flex-col justify-center items-center'>
+        <p className='text-2xl font-semibold py-8'>List of Applicants</p>
+        {jobApplications.length === 0 ? (
+          <p>No job applications submitted yet.</p>
+        ) : (
+          <>
+            <div className='w-full px-4 flex flex-col items-center justify-center'>
+              <p className='py-4 font-medium text-xl'>Number of Applicants : {jobApplications.length}</p>
+              <DataTable columns={columns} rows={jobApplications} />
+              <div className='w-full sm:flex md:hidden lg:hidden'>
+                {jobApplications.map((applicant) => (
+                  <div key={applicant.id} className='shadow-md p-4 rounded my-4 w-full'>
+                    <p>Name: {applicant.applicantName}</p>
+                    <p>Email: {applicant.applicantEmail}</p>
+                    <p>Highest Qualification: {applicant.qualifications[applicant.qualifications.length - 1].degree} - {applicant.qualifications[applicant.qualifications.length - 1].institute}</p>
+                    
+                    <button onClick={() => handleLearnMore(applicant.id)} className='bg-lime-500 rounded px-2 py-1'>Learn More</button>
+                  </div>
+                ))}
               </div>
-            ))}
-            <Link to={applicant.resumeUrl}>Download Resume</Link> 
-          </li>
-        ))}
-      </ul> */}
-      <div className='w-full py-8  px-1 flex flex-col justify-center items-center'>
-                <p className='text-2xl font-semibold py-8'>List of Applicants</p>
-                {isLoading ? (
-                    <CircularProgress/>
-                ) : isError ? (
-                    <p>Error fetching data</p>
-                ) : (
-                    <DataTable  columns={columns} rows={jobApplications} />
-                )}
-                {/* <div className=' w-full sm:flex md:hidden lg:hidden'>
-                    {jobs && jobs.map((job) => (
-                        <JobCard key={job.id} title={job.title} location={job.location} date={job.date} type={job.type} apply={() => handleApply(job.id)} />
-                    ))}
-                </div> */}
             </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };
