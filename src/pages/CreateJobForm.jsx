@@ -11,7 +11,7 @@ const CreateJobForm = () => {
     const [requirements, setRequirements] = useState('');
     const [salary, setSalary] = useState('');
     const [location, setLocation] = useState('');
-    const [type, setType] = useState('');
+    const [type, setType] = useState('Full Time');
     const [openings, setOpenings] = useState('');
     const {  createJob, isLoading, error} = useCreateJob();
 
@@ -24,7 +24,7 @@ const CreateJobForm = () => {
             openings,
             type,
         };
-    
+            console.log(formData);
         
             await createJob(formData);
             if(!error){
@@ -49,13 +49,14 @@ const CreateJobForm = () => {
                 <div className='w-full py-8'>
                 <div>
                 <div>
-                    <label htmlFor="title" className="block text-lg font-semibold mt-2">Title:</label>
+                    <label htmlFor="title" className="block text-lg font-semibold mt-2">Title</label>
                     <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} required className="w-full border border-gray-500 rounded px-3 py-2" />
                 </div>
                 <div>
-                    <label htmlFor="responsibilities" className="block text-lg font-semibold mt-2">Responsibilities:</label>
+                    <label htmlFor="responsibilities" className="block text-lg font-semibold mt-2">Responsibilities <span className='text-sm'>(add commas after each responsibility)</span></label>
                     <textarea
                     id="responsibilities"
+                    placeholder='Build the data models, build the frontend'
                     className="w-full border border-gray-500 rounded px-3 py-2 h-40 " 
                     value={responsibilities}
                     onChange={(e) => setResponsibilities(e.target.value)}
@@ -63,28 +64,28 @@ const CreateJobForm = () => {
                     />
                     </div>
                 <div>
-                    <label htmlFor="requirements" className="block text-lg font-semibold mt-2">Requirements:</label>
-                    <textarea id="requirements" value={requirements} onChange={(e) => setRequirements(e.target.value)} required className="w-full border border-gray-500 h-40  rounded px-3 py-2"></textarea>
+                    <label htmlFor="requirements" className="block text-lg font-semibold mt-2">Requirements <span className='text-sm'>(add commas after each requirement)</span></label>
+                    <textarea id="requirements" value={requirements} onChange={(e) => setRequirements(e.target.value)} placeholder='6yrs of Experience in Node Js, 6+ years of experience in React js' required className="w-full border border-gray-500 h-40  rounded px-3 py-2"></textarea>
                 </div>
                 </div>
                 {/*----------------- */}
                 <div className='md:flex gap-4' >
                 <div>
-                    <label htmlFor="salary" className="block text-lg font-semibold mt-2">Salary:</label>
+                    <label htmlFor="salary" className="block text-lg font-semibold mt-2">Salary</label>
                     <input type="number" id="salary" value={salary} onChange={(e) => setSalary(e.target.value)} className="w-full border border-gray-500 rounded px-3 py-2" />
                 </div>
                 <div>
-                    <label htmlFor="location" className="block text-lg font-semibold mt-2">Location:</label>
+                    <label htmlFor="location" className="block text-lg font-semibold mt-2">Location</label>
                     <input type="text" id="location" value={location} onChange={(e) => setLocation(e.target.value)} required className="w-full border border-gray-500 rounded px-3 py-2" />
                 </div>
                 </div>
                 <div className='md:flex gap-4 items-center'>
                 <div>
-                    <label htmlFor="openings" className="block text-lg font-semibold mt-2">Openings:</label>
+                    <label htmlFor="openings" className="block text-lg font-semibold mt-2">Openings</label>
                     <input type="number" id="openings" value={openings} onChange={(e) => setOpenings(e.target.value)} className="w-full border border-gray-500 rounded px-3 py-2" />
                 </div>
                 <div className='w-full md:w-1/2'>
-                    <label htmlFor="type" className="block text-lg font-semibold mt-2">Type:</label>
+                    <label htmlFor="type" className="block text-lg font-semibold mt-2">Type</label>
                     <select
                         id="type"
                         value={type}
