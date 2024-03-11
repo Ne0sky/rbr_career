@@ -58,7 +58,7 @@ const Dashboard = () => {
             <h2 className="text-3xl font-semibold mb-4">List of all active jobs</h2>
             <div className="grid grid-cols-1 gap-4">
                 {jobs.map((job) => (
-                    <div key={job._id} className="bg-white gap-2 flex items-center justify-between shadow-md rounded-md p-4">
+                    <div key={job._id} className="bg-white gap-4 flex items-center justify-between shadow-md rounded-md p-4">
                         <div className='flex flex-col gap-2'>
                             
                             <h3 className="text-lg font-semibold">{job.title}</h3>

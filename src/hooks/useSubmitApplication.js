@@ -19,6 +19,7 @@ const useSubmitApplication = () => {
             toast.success('Application submitted successfully!');
         } catch (error) {
             console.error('Error submitting application:', error);
+            toast.error('Error submitting application: ' + error.message);
             setError(error);
         } finally {
             setIsLoading(false);

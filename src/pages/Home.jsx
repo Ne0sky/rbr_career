@@ -5,6 +5,10 @@ import useGetJobs from '../hooks/useGetJobs';
 import JobCard from '../Components/JobCard';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Link } from 'react-router-dom';
+import teamData from '../data/Team';
+import { MdArrowOutward } from "react-icons/md";
+import TeamCard from '../Components/TeamCard';
+
 const Home = () => {
   const { data: jobs, isLoading, isError } = useGetJobs();
   const handleApply = (_id) => {
@@ -33,8 +37,8 @@ const Home = () => {
    
       </div>
       
-      <Service_section />
       
+      {/* Job Openings Section*/}
       <div className='w-full md:w-[80%] lg:w-[70%]'>
           {
             isLoading ? (
@@ -44,19 +48,30 @@ const Home = () => {
             ) : isError ? (
               <div>Error: {isError.message}</div>
             ) : jobs ? (
-              <div className='flex w-full  items-center flex-col my-8 gap-6'>
-              <p className='text-2xl font-semibold'>Recent Job Openings</p>
+              <div className='flex w-full  items-center flex-col my-16 gap-6'>
+              <p className='text-3xl font-semibold'>Recent Job Openings</p>
               <div className='flex gap-4 w-full'>
               {jobs.slice(jobs.length-2, jobs.length).map((job) => (
                 <JobCard className='w-80' key={job._id} title={job.title} location={job.location} date={job.postedOn} openings={job.openings} type={job.type} apply={() => handleApply(job._id)} />
               ))}
               </div>
-              <Link to='/careers' className='bg-zinc-600 w-40 text-white py-2 px-4 rounded-md text-center font-semibold'>View All Jobs</Link>
+              <Link to='/careers' className='bg-zinc-600 w-48 text-white py-2 px-4 rounded-md text-center font-semibold flex items-center gap-1 justify-center hover:bg-zinc-800'>View All Jobs <MdArrowOutward className='text-xl'/></Link>
               </div>
               
             ) : null
 
           }
+      </div>
+      <Service_section />
+      {/* Team Section */}
+      <div className='py-12 flex flex-col items-center justify-center'>
+        <h3 className='text-3xl font-bold'>Meet Our Team</h3>
+        <p className='text-xl font-medium py-4'>We have a dedicated team commited to supporting you and your business</p>
+        <div className='flex flex-wrap py-12 justify-center items-center gap-4'>
+          {teamData.map((member) => (
+            <TeamCard key={member.id} name={member.name} role={member.role} desc={member.desc} image={member.image} />
+          ))}
+        </div>
       </div>
 
     </div>

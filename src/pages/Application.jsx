@@ -14,7 +14,7 @@ const Application = () => {
     const [applicantName, setApplicantName] = useState('');
     const [applicantEmail, setApplicantEmail] = useState('');
     const [applicantPhone, setApplicantPhone] = useState('');
-    const [experience, setExpericience] = useState();
+    const [experience, setExpericience] = useState('');
     const [degree, setDegree] = useState('');
     const [institute, setInstitute] = useState('');
     const [qualifications, setQualifications] = useState([]);
@@ -88,10 +88,10 @@ const Application = () => {
         setApplicantName('');
         setApplicantEmail('');
         setApplicantPhone('');
-        setCoverLetter('');
         setQualifications([]);
         setDegree('');
         setInstitute('');
+        setExpericience('');
     };
 
     const input_style = "rounded  w-full"
@@ -110,7 +110,7 @@ const Application = () => {
                 <TextField className={input_style} label='Email Address' required type="email" id="applicantEmail"  value={applicantEmail} onChange={(e) => setApplicantEmail(e.target.value)} />
             </div>
             <div className="mb-4">
-                <TextField className={input_style} type="text" required id="applicantPhone" label='Phone Number' value={applicantPhone} onChange={(e) => setApplicantPhone(e.target.value)} />
+                <TextField className={input_style} type="tel" required id="applicantPhone" label='Phone Number' value={applicantPhone} onChange={(e) => setApplicantPhone(e.target.value)} />
             </div>
             <div className='mb-4'>
                 <TextField className={input_style} type="number" required id="experience" label='Years of Experience' value={experience} onChange={(e) => setExpericience(e.target.value)} />

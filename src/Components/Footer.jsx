@@ -4,7 +4,7 @@ import { FaPhoneSquareAlt } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-zinc-950 text-white flex flex-col gap-8 overflow-x-hidden md:flex-row justify-around py-12 px-4 font-main">
+    <footer className="bg-zinc-950  w-full text-white flex flex-col gap-8 overflow-x-hidden md:flex-row justify-around py-12 px-4 font-main">
         <div className=''>
             <div className='flex flex-col gap-8'>
                 <span className='flex items-center gap-4'><img className='w-12 ' src="/logo.webp" alt="" /><h1 className='text-2xl font-bold'>RAUDRA</h1></span>
