@@ -49,10 +49,7 @@ const Navbar = () => {
           {user && (
             <ul className='space-y-2'>
               <li>
-              <NavLink to='/admin_panel' className="font-semibold lg:text-xl hover:underline" >Dashboard</NavLink>
-            </li>
-            <li>
-              <NavLink to='/admin/create_job' className='font-semibold lg:text-xl hover:underline'>Create Job</NavLink>
+              <NavLink to='/admin/dashboard' className="font-semibold lg:text-xl hover:underline" >Dashboard</NavLink>
             </li>
             <li>
               <button onClick={handleLogout} className='bg-rose-500 px-4 py-2 text-white rounded' >Logout</button>
@@ -74,7 +71,7 @@ const Navbar = () => {
           <ul className='flex items-center gap-6'>
           
         <li>
-              <NavLink to='/admin/jobs' className='font-semibold lg:text-xl hover:underline'>Jobs</NavLink>
+              <NavLink to='/admin/dashboard' className='font-semibold lg:text-xl hover:underline'>Dashboard</NavLink>
             </li>
         <li>
             <button onClick={handleLogout} className='bg-rose-500 px-4 py-2 text-white rounded' >Logout</button>

@@ -11,7 +11,7 @@ import { IoMdCreate } from "react-icons/io";
 import { confirmAlert } from 'react-confirm-alert'; // Import react-confirm-alert
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css for the default styling
 
-const AllJobs = () => {
+const Dashboard = () => {
     const { data: jobs, isLoading, isError, error, refetch } = useJobs();
     const deleteJob = useDeleteJob();
 
@@ -91,4 +91,4 @@ const AllJobs = () => {
     );
 };
 
-export default AllJobs;
+export default Dashboard;

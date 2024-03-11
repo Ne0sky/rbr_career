@@ -94,10 +94,10 @@ const Application = () => {
         setInstitute('');
     };
 
-    const input_style = "border border-gray-500 rounded px-4 py-2 w-full"
+    const input_style = "rounded  w-full"
     return (
         <div className='mx-auto w-full flex flex-col font-main items-center justify-center py-12'>
-            <h1 className='text-2xl font-bold pb-8'>Job Application Form</h1>
+            <h1 className='text-xl md:text-2xl lg:text-3xl font-bold pb-8'>Job Application Form</h1>
         <form className="max-w-md  px-4" >
             <div className="mb-4">                
             </div>
@@ -112,7 +112,7 @@ const Application = () => {
             <div className="mb-4">
                 <TextField className={input_style} type="text" required id="applicantPhone" label='Phone Number' value={applicantPhone} onChange={(e) => setApplicantPhone(e.target.value)} />
             </div>
-            <div>
+            <div className='mb-4'>
                 <TextField className={input_style} type="number" required id="experience" label='Years of Experience' value={experience} onChange={(e) => setExpericience(e.target.value)} />
             </div>
             <label className="block text-xl font-semibold">Qualifications</label>
