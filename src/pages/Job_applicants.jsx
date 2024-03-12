@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
 import DataTable from '../Components/DataTable';
 import useGetJobApplications from '../hooks/useGetJobApplications';
 import { confirmAlert } from 'react-confirm-alert'; // Import react-confirm-alert
@@ -8,11 +7,41 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css for the 
 import useDeleteApplicant from '../hooks/useDeleteApplicant'; // Import the useDeleteApplicant hook
 import { CircularProgress } from '@mui/material';
 import { MdDelete } from "react-icons/md";
+import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 const Job_Applicants = () => {
+  const cookies = new Cookies();
+  const token = cookies.get('token');
   const { id } = useParams();
   const { data: jobApplications, isLoading, isError, error, refetch } = useGetJobApplications(id);
-  const deleteApplicant = useDeleteApplicant(); // Use the useDeleteApplicant hook
+  const deleteApplicant = useDeleteApplicant(); 
+
+        const handleExport = async () => {
+          console.log('Exporting');
+          try {
+            const res = await axios.get(`https://rbrcareers.vercel.app/admin/export/${id}`, {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              },
+              responseType: 'blob',
+            });
+
+            const blob = new Blob([
+      res.data
+      ], { type: 'text/csv' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            
+      link.download
+      = 'job_applications.csv';
+            
+      link.click
+      ();
+    } catch (error) {
+      console.error('Error exporting CSV:', error);
+    }
+  }; 
 
   const handleDelete = (id) => {
     confirmAlert({
@@ -85,6 +114,7 @@ const Job_Applicants = () => {
   return (
     <div className='py-12 font-main'>
       <div className='w-full py-8 px-1 flex flex-col justify-center items-center'>
+        <button onClick={handleExport} className='bg-lime-500 text-white rounded px-2 py-1'>Export to CSV</button>
         <p className='text-2xl font-semibold py-8'>List of Applicants</p>
         {jobApplications.length === 0 ? (
           <p>No job applications submitted yet.</p>
