@@ -25,10 +25,10 @@ const Home = () => {
         <h1 className='text-2xl lg:text-4xl  font-bold mb-4 text-black'>Elevate Your Business with  <span className=''>Tailor-Made Tech Brilliance!</span></h1>
         <p className='lg:text-lg font-medium '>Scaling Engineering Teams and Delivering Unparalleled Development Services in AI, ML, Data Science, Web and Mobile Applications</p>
         <button className='bg-zinc-900 my-8 px-4 py-2 rounded font-semibold text-xl text-white'>Join us now</button>
-        <div  class="bg-gradient-to-r  my-4 from-zinc-100 to-transparent p-4 border-l-4 border-blue-500 ">
+        {/* <div  class="bg-gradient-to-r  my-4 from-zinc-100 to-transparent p-4 border-l-4 border-blue-500 ">
           <span className='text-xl font-bold '>For any enquiries please  </span>
           <div className='text-xl font-bold text-blue-500'>WhatsApp at <span className='whitespace-nowrap'>+91 77807 34983</span></div>
-        </div>
+        </div> */}
         
         <Marquee className='bg-zinc-200 py-2 font-bold text-xl' pauseOnHover >
           <p className='px-2'>Hiring going on for full time positions and internships. Apply now! </p>

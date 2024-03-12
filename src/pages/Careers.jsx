@@ -60,7 +60,7 @@ const Careers = () => {
         ) : null}
         <div className='w-full px-2 sm:flex md:hidden lg:hidden'>
           {filterData && filterData.map((job) => (
-            <JobCard key={job._id} title={job.title} openings={job.openings} location={job.location} date={job.postedOn} type={job.type} apply={() => handleApply(job.id)} />
+            <JobCard key={job._id} title={job.title} openings={job.openings} location={job.location} date={job.postedOn} type={job.type} apply={() => handleApply(job._id)} />
           ))}
           <ReactPaginate
             containerClassName={"pagination"}
