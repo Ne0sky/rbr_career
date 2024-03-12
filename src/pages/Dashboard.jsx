@@ -10,6 +10,11 @@ import { LuClock } from "react-icons/lu";
 import { IoMdCreate } from "react-icons/io";
 import { confirmAlert } from 'react-confirm-alert'; // Import react-confirm-alert
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css for the default styling
+import ReactPaginate from "react-paginate";
+import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
+import { IconContext } from "react-icons";
+import { IoSearch } from "react-icons/io5";
+import { FaFilter } from "react-icons/fa";
 
 const Dashboard = () => {
     const { data: jobs, isLoading, isError, error, refetch } = useJobs();
@@ -20,12 +25,24 @@ const Dashboard = () => {
     const [sortedJobs, setSortedJobs] = useState([]);
     const [sortAsc, setSortAsc] = useState(true);
     const [sortLabel, setSortLabel] = useState('Recent First');
-    
+    const [page, setPage] = useState(0);
+    const [filterData, setFilterData] = useState();
+    const n = 3;
     useEffect(() => {
         if (jobs) {
             setSortedJobs(jobs);
         }
     }, [jobs]);
+
+    useEffect(() => {
+        if (sortedJobs) {
+            setFilterData(
+                sortedJobs.filter((item, index) => {
+                    return (index >= page * n) && (index < (page + 1) * n);
+                })
+            );
+        }
+    }, [page, sortedJobs]);
 
     const handleDelete = (id) => {
         confirmAlert({
@@ -71,6 +88,7 @@ const Dashboard = () => {
             (searchType === '' || job.type === searchType)
         );
         setSortedJobs(filteredJobs);
+        setFilterData(sortedJobs);
     };
     const handleReset = () => {
         setSearchTerm('');
@@ -98,8 +116,8 @@ const Dashboard = () => {
     return (
         <div className="max-w-4xl min-h-screen font-main px-2 mx-auto py-24">
             <Link className='float-right flex items-center gap-2 bg-amber-500 p-2 rounded text-white font-semibold' to='/admin/create_job'>Create new Job<IoMdCreate/></Link>
-            <h2 className="text-3xl font-semibold mb-4">List of all active jobs</h2>
-            <h3 className='text-xl font-semibold'>Filters</h3>
+            <h2 className="text-3xl font-semibold mb-4">List of all active jobs {jobs.length}</h2>
+            <h3 className='text-xl font-semibold flex items-center gap-2'>Filters<FaFilter/></h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 py-4">
                 <input
                     type="text"
@@ -124,7 +142,7 @@ const Dashboard = () => {
                     <option value="Full Time">Full Time</option>
                     <option value="Internship">Internship</option>
                 </select>
-                <button onClick={handleSearch} className=" bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md">Search</button>
+                <button onClick={handleSearch} className=" bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center gap-2 justify-center">Search <IoSearch/></button>
                 <button onClick={handleReset} className=" bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md">Reset Filters</button>
 
             </div>
@@ -133,34 +151,60 @@ const Dashboard = () => {
             </button>
             <div className="grid grid-cols-1 gap-4">
                 <Suspense fallback={<CircularProgress />}>
-                {sortedJobs.map((job) => (
-                    <div key={job._id} className="bg-neutral-100 border-l-2 border-blue-500 gap-4 flex items-center justify-between shadow-md p-4">
-                        <div className='flex flex-col gap-2'>
-                            <h3 className="text-lg font-semibold">{job.title}</h3>
-                            <p className=" rounded-full text-center py-1 px-2 bg-zinc-300"> {job.type}</p>
-                            <p className='flex items-center gap-2'><CiLocationOn className='text-xl'/> {job.location}</p>
-                            <p className="text-gray-600 flex items-center gap-2"><LuClock/> {new Date(job.postedOn).toLocaleDateString()}</p>
-                            <div className='flex items-center gap-4'>
-                                <Link to={`/job/${job._id}`} target='_blank' className='bg-zinc-900 text-white py-1 px-2 w-24 text-center text-sm rounded-md'>See More</Link>
-                                <Link to={`/admin/job_applicants/${job._id}`} target='_blank' className='bg-blue-500 text-white py-1 px-2 w-36 text-center text-sm rounded-md'>See Applications</Link>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-2 justify-center">
-                            <Link
-                                to={`/admin/edit_job`}
-                                className="text-white rounded-md bg-blue-500 hover:bg-blue-700 flex items-center gap-1 px-2 py-1"
-                                state={{ job }}
-                            >
-                                <FaEdit />Edit
-                            </Link>
-                            <button onClick={() => handleDelete(job._id)} className="rounded-md bg-rose-500 hover:bg-rose-700 text-white flex items-center gap-1 p-1 ">
-                                <MdDeleteSweep />Delete
-                            </button>
-                        </div>
-                    </div>
-                ))}
+                {filterData && filterData.length > 0 ? (
+  filterData.map((job) => (
+    <div key={job._id} className="bg-neutral-100 border-l-2 border-blue-500 gap-4 flex items-center justify-between shadow-md p-4">
+      <div className='flex flex-col gap-2'>
+        <h3 className="text-lg font-semibold">{job.title}</h3>
+        <p className="rounded-full text-center py-1 px-2 bg-zinc-300">{job.type}</p>
+        <p className='flex items-center gap-2'><CiLocationOn className='text-xl'/> {job.location}</p>
+        <p className="text-gray-600 flex items-center gap-2"><LuClock/> {new Date(job.postedOn).toLocaleDateString()}</p>
+        <div className='flex items-center gap-4'>
+          <Link to={`/job/${job._id}`} target='_blank' className='bg-zinc-900 text-white py-1 px-2 w-24 text-center text-sm rounded-md'>See More</Link>
+          <Link to={`/admin/job_applicants/${job._id}`} target='_blank' className='bg-blue-500 text-white py-1 px-2 w-36 text-center text-sm rounded-md'>See Applications</Link>
+        </div>
+      </div>
+      <div className="flex flex-col gap-2 justify-center">
+        <Link
+          to={`/admin/edit_job`}
+          className="text-white rounded-md bg-blue-500 hover:bg-blue-700 flex items-center gap-1 px-2 py-1"
+          state={{ job }}
+        >
+          <FaEdit />Edit
+        </Link>
+        <button onClick={() => handleDelete(job._id)} className="rounded-md bg-rose-500 hover:bg-rose-700 text-white flex items-center gap-1 p-1">
+          <MdDeleteSweep />Delete
+        </button>
+      </div>
+    </div>
+  ))
+) : (
+  <p>No jobs available</p>
+)}
+
                 </Suspense>
             </div>
+            <ReactPaginate
+            containerClassName={"pagination"}
+            activeClassName={"Pg_active"}
+            pageClassName={"page-item"}
+            onPageChange={(event) => setPage(event.selected)}
+            breakLabel="..."
+            pageCount={sortedJobs ? Math.ceil(sortedJobs.length / n) : 0} 
+            previousLabel={
+              <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
+                <AiFillLeftCircle />
+              </IconContext.Provider>
+            }
+            nextLabel={
+              <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
+                <AiFillRightCircle />
+              </IconContext.Provider>
+            }
+          />
+
+
+
         </div>
     );
 };

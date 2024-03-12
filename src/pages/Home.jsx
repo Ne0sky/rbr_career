@@ -22,7 +22,7 @@ const Home = () => {
       <img className='w-96 md:w-80 lg:w-[450px] rounded-xl' src="/hero.png" alt="" />
       </div>
       <div className='lg:w-1/2 py-8 w-full flex justify-center items-start flex-col'>
-        <h1 className='text-2xl lg:text-4xl xl:text-5xl font-bold mb-4 text-black'>Elevate Your Business with  <span className=''>Tailor-Made Tech Brilliance!</span></h1>
+        <h1 className='text-2xl lg:text-4xl  font-bold mb-4 text-black'>Elevate Your Business with  <span className=''>Tailor-Made Tech Brilliance!</span></h1>
         <p className='lg:text-lg font-medium '>Scaling Engineering Teams and Delivering Unparalleled Development Services in AI, ML, Data Science, Web and Mobile Applications</p>
         <button className='bg-zinc-900 my-8 px-4 py-2 rounded font-semibold text-xl text-white'>Join us now</button>
         <div  class="bg-gradient-to-r  my-4 from-zinc-100 to-transparent p-4 border-l-4 border-blue-500 ">
@@ -50,7 +50,7 @@ const Home = () => {
             ) : jobs ? (
               <div className='flex w-full  items-center flex-col my-16 gap-6'>
               <p className='text-3xl font-semibold'>Recent Job Openings</p>
-              <div className='flex gap-4 w-full'>
+              <div className='flex flex-col md:flex-row gap-4 w-full'>
               {jobs.slice(jobs.length-2, jobs.length).map((job) => (
                 <JobCard className='w-80' key={job._id} title={job.title} location={job.location} date={job.postedOn} openings={job.openings} type={job.type} apply={() => handleApply(job._id)} />
               ))}

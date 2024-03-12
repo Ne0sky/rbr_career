@@ -1,13 +1,28 @@
-import React from 'react'
-import { useState, useEffect, useCallback } from 'react';
-import DataTable from '../Components/DataTable'
-import { SiGoogleclassroom } from "react-icons/si";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import DataTable from '../Components/DataTable';
+import ReactPaginate from "react-paginate";
+import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
+import { IconContext } from "react-icons";
 import JobCard from '../Components/JobCard';
 import useGetJobs from '../hooks/useGetJobs';
 import CircularProgress from '@mui/material/CircularProgress';
+
 const Careers = () => {
   const { data: jobs, isLoading, isError } = useGetJobs();
-  
+  const [page, setPage] = useState(0);
+  const [filterData, setFilterData] = useState();
+  const n = 3;
+
+  useEffect(() => {
+    if (jobs) {
+      setFilterData(
+        jobs.filter((item, index) => {
+          return (index >= page * n) && (index < (page + 1) * n);
+        })
+      );
+    }
+  }, [page, jobs]);
 
   const columns = [
     { field: 'title', headerName: 'Title', flex: 1 },
@@ -27,49 +42,46 @@ const Careers = () => {
     console.log('Applying for job with ID:', _id);
     window.open(`/job/${_id}`, '_blank');
   };
+
   return (
-    <div className='font-main  flex flex-col w-full  items-center overflow-x-hidden  justify-center'>
-      <div className='bg-gray-200  w-full banner text-center overflow-x-hidden space-y-8 py-16'>
-        <p className='text-4xl font-semibold'>Become part of our team!</p>
-        
-        <p className='text-2xl'>Browse through our careers to be a part of Raudra Technologies</p>
+    <div className='font-main flex flex-col w-full items-center overflow-x-hidden justify-center'>
+      <div className='bg-gray-200 w-full banner text-center overflow-x-hidden space-y-8 py-16'>
+        <p className='text-2xl md:text-3xl lg:text-4xl font-semibold'>Become part of our team!</p>
+        <p className='text-xl'>Browse through our careers to be a part of Raudra Technologies</p>
       </div>
-      <div className='w-full py-8  px-1 flex flex-col justify-center items-center'>
+      <div className='w-full py-8 px-1 flex flex-col justify-center items-center'>
         <p className='text-2xl font-semibold py-8'>Job Openings</p>
         {isLoading ? (
-          <CircularProgress/>
+          <CircularProgress />
         ) : isError ? (
           <p>Error fetching data</p>
         ) : jobs ? (
-          console.log(jobs),
           <DataTable columns={columns} rows={jobs} />
         ) : null}
-        <div className=' w-full px-2 sm:flex md:hidden lg:hidden'>
-          {jobs && jobs.map((job) => (
+        <div className='w-full px-2 sm:flex md:hidden lg:hidden'>
+          {filterData && filterData.map((job) => (
             <JobCard key={job._id} title={job.title} openings={job.openings} location={job.location} date={job.postedOn} type={job.type} apply={() => handleApply(job.id)} />
           ))}
+          <ReactPaginate
+            containerClassName={"pagination"}
+            activeClassName={"Pg_active"}
+            pageClassName={"page-item"}
+            onPageChange={(event) => setPage(event.selected)}
+            breakLabel="..."
+            pageCount={jobs ? Math.ceil(jobs.length / n) : 0} // Check if jobs is defined before calculating page count
+            previousLabel={
+              <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
+                <AiFillLeftCircle />
+              </IconContext.Provider>
+            }
+            nextLabel={
+              <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
+                <AiFillRightCircle />
+              </IconContext.Provider>
+            }
+          />
         </div>
       </div>
-      {/* <div className='flex w-full py-8 justify-center flex-col items-center px-4'>
-        <p className='text-2xl font-semibold pb-8'>Why should you join Raudra Technologies?</p>
-        <div className='flex flex-col md:flex-row justify-center py-8 items-center gap-4 w-[90%] '>
-          <div className='max-w-1/3 flex flex-col justify-center items-center '>
-            <SiGoogleclassroom className='text-5xl text-blue-500'/>
-            <p className='text-xl font-bold'>Exciting Projects & Clients</p>
-            <p>we foster an innovative work culture where employees are encouraged to think creatively and contribute their ideas to solve complex problems</p>
-          </div>
-          <div className='max-w-1/3 flex flex-col justify-center items-center'>
-            <SiGoogleclassroom className='text-5xl text-blue-500'/>
-            <p className='text-xl font-bold'>Exciting Projects & Clients</p>
-            <p>we foster an innovative work culture where employees are encouraged to think creatively and contribute their ideas to solve complex problems</p>
-          </div>
-          <div className='max-w-1/3 flex flex-col justify-center items-center'>
-            <SiGoogleclassroom className='text-5xl text-blue-500'/>
-            <p className='text-xl font-bold'>Exciting Projects & Clients</p>
-            <p>we foster an innovative work culture where employees are encouraged to think creatively and contribute their ideas to solve complex problems</p>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 }

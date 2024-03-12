@@ -15,4 +15,29 @@ body, html {
   box-sizing: border-box;
 }
 
+.pagination {
+  list-style: none;
+  height: auto;
+  width: 100%;
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+
+
+
+
+.Pg_active {
+  background-color: #297efd;
+  color: white;
+  border-radius: 20%;
+  padding: 4px 13px;
+}
+
+
+
 
