@@ -6,6 +6,7 @@ import { FaPaperPlane } from "react-icons/fa";
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
 import toast from 'react-hot-toast';
+import  validateEmail from '../utils/validate_email';
 
 const Application = () => {
     const { id } = useParams();
@@ -114,8 +115,9 @@ const Application = () => {
             toast.error('Please fill in all the fields');
             return;
         }
-        if(!applicantEmail.contains('@') && !applicantEmail.contains('.')){
-            toast.error('Please enter a valid email');
+       
+        if (!validateEmail(applicantEmail)) {
+            toast.error('Invalid email address');
             return;
         }
 
