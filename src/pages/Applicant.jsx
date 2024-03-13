@@ -10,7 +10,7 @@ const Applicant = () => {
   const { data: applicant, isLoading, isError } = useGetApplicantById(id);
 
   return (
-    <div className='w-full px-4 md:px-8 lg:px-12 mt-20 font-main py-16 md:w-[90%] lg:w-[60%] bg-zinc-100 mx-auto'>
+    <div className='w-full  min-h-screen px-4 md:px-8 lg:px-12 mt-20 font-main py-16 md:w-[90%] lg:w-[60%] bg-zinc-100 mx-auto'>
       <h1 className='text-3xl  font-semibold mt-4'>Applicant Details</h1>
       {isLoading ? (
         <div className="flex justify-center items-center"><CircularProgress/></div>

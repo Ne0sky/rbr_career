@@ -14,7 +14,7 @@ const Job = () => {
   };
 
   return (
-    <div className='w-full px-4 min-h-screen font-main py-16 md:w-[90%] lg:w-[80%] mx-auto'>
+    <div className='w-full mt-20 px-4 min-h-screen font-main py-16 md:w-[90%] lg:w-[80%] mx-auto'>
       
       <h1 className='text-3xl font-semibold mt-4'>Job Details</h1>
       {isLoading ? (

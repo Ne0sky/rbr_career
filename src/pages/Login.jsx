@@ -27,7 +27,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex py-16 justify-center items-center p-8 font-main">
+    <div className="flex py-16 mt-20 min-h-screen justify-center items-center p-8 font-main">
       <div className="w-full md:w-1/2 lg:w-1/3  bg-zinc-100 rounded-md border  shadow-md">
         <form onSubmit={handleSubmit} className='p-4 flex flex-col justify-center'>
           <div className='text-5xl mx-auto '><MdAccountCircle/></div>

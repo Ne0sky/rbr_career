@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const useGetJobById = (jobId) => {
   const getJobById = async () => {
-    const response = await axios.get(`https://rbrcareers.vercel.app/jobs/${jobId}`);
+    const response = await axios.get(`https://rbrcareers-seven.vercel.app/jobs/${jobId}`);
     const jobData = response.data.data;
 
     console.log(jobData);

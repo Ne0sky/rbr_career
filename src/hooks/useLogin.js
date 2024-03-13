@@ -21,7 +21,7 @@ export const useLogin = () =>{
         }
 
         
-        const response = await fetch(`https://rbrcareers.vercel.app/auth/login`,{
+        const response = await fetch(`https://rbrcareers-seven.vercel.app/auth/login`,{
             method: 'POST',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify(data)
@@ -48,7 +48,7 @@ export const useLogin = () =>{
             
             //update AuthContext
             dispatch({type:'LOGIN', payload: { ...json.data, type: decodedData.type }})
-            nav(`/admin_panel`)
+            nav(`/admin/dashboard`)
             setIsLoading(false)
             setError(null)
             

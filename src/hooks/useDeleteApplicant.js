@@ -6,7 +6,7 @@ const useDeleteApplicant = () => {
     const deleteApplicantMutation = useMutation(async (id) => {
         const cookies = new Cookies();
         const token = cookies.get('token');
-        await axios.delete(`https://rbrcareers.vercel.app/admin/applicant/${id}`, {
+        await axios.delete(`https://rbrcareers-seven.vercel.app/admin/applicant/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

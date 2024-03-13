@@ -94,6 +94,7 @@ const Application = () => {
         setDegree('');
         setInstitute('');
         setExpericience('');
+        setSemester('');
     };
 
     const input_style = "rounded  w-full"

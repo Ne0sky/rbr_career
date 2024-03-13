@@ -6,7 +6,7 @@ const fetchJobs = async () => {
     const cookies = new Cookies();
     const token = cookies.get('token');
     try {
-        const response = await axios.get('https://rbrcareers.vercel.app/admin/jobs', {
+        const response = await axios.get('https://rbrcareers-seven.vercel.app/admin/jobs', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

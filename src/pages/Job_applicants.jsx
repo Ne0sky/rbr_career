@@ -9,6 +9,8 @@ import { CircularProgress } from '@mui/material';
 import { MdDelete } from "react-icons/md";
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import { BiSolidSad } from "react-icons/bi";
+import { RiFileExcel2Line } from "react-icons/ri";
 
 const Job_Applicants = () => {
   const cookies = new Cookies();
@@ -20,7 +22,7 @@ const Job_Applicants = () => {
         const handleExport = async () => {
           console.log('Exporting');
           try {
-            const res = await axios.get(`https://rbrcareers.vercel.app/admin/export/${id}`, {
+            const res = await axios.get(`https://rbrcareers-seven.vercel.app/admin/export/${id}`, {
               headers: {
                 'Authorization': `Bearer ${token}`
               },
@@ -65,7 +67,7 @@ const Job_Applicants = () => {
 
   const columns = [
     { field: 'applicantName', headerName: 'Name', flex: 1 },
-    { field: 'applicantEmail', headerName: 'Email', flex: 1 },
+    {field: 'semester', headerName: 'Semester', flex: 1},
     { field: 'yearsOfExperience', headerName: 'Year of Experience', flex: 1 },
     { 
       field: 'Highest Qualification', 
@@ -112,12 +114,26 @@ const Job_Applicants = () => {
   }
  
   return (
-    <div className='py-12 font-main'>
+    <div className='py-12 font-main mt-20 min-h-screen'>
       <div className='w-full py-8 px-1 flex flex-col justify-center items-center'>
-        <button onClick={handleExport} className='bg-lime-500 text-white rounded px-2 py-1'>Export to CSV</button>
-        <p className='text-2xl font-semibold py-8'>List of Applicants</p>
+        {
+          isLoading && <p>Loading...</p>
+        }
+        {
+          isError && <p>Error fetching job applications</p>
+        }
+      { 
+        jobApplications.length > 0 && (
+          <div className='flex items-center gap-4'>
+            <button onClick={handleExport} className='bg-lime-500 rounded px-4 py-2 flex items-center gap-2 text-white'>
+              Export <RiFileExcel2Line/>
+            </button>
+          </div>
+        )
+      }
+        <p className='text-2xl font-semibold py-8'>List of Applicants </p>
         {jobApplications.length === 0 ? (
-          <p>No job applications submitted yet.</p>
+          <p className='flex items-center gap-4 p-2 rounded bg-rose-300 border border-rose-500'>No job applications submitted yet <BiSolidSad/></p>
         ) : (
           <>
             <div className='w-full px-4 flex flex-col items-center justify-center'>
@@ -127,7 +143,7 @@ const Job_Applicants = () => {
                 {jobApplications.map((applicant) => (
                   <div key={applicant._id} className='shadow-md p-4 rounded my-4 w-full'>
                     <p>Name: {applicant.applicantName}</p>
-                    <p>Email: {applicant.applicantEmail}</p>
+                    <p>Semester : {applicant.semester}</p>
                     <p>Highest Qualification: {applicant.qualifications[applicant.qualifications.length - 1].degree} - {applicant.qualifications[applicant.qualifications.length - 1].institute}</p>
                     <p>Years of Experience: {applicant.yearsOfExperience}</p>
                     <button onClick={() => handleLearnMore(applicant.id)} className='bg-lime-500 rounded px-2 py-1'>Learn More</button>

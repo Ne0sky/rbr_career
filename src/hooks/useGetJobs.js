@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const useGetJobs = () => {
   const getJobs = useCallback(async () => {
-    const response = await axios.get('https://rbrcareers.vercel.app/jobs/allJobs');
+    const response = await axios.get('https://rbrcareers-seven.vercel.app/jobs/allJobs');
     const jobsData = response.data.data;
 
     return jobsData;

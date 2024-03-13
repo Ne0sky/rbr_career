@@ -14,7 +14,7 @@ const useEditJob = (job) => {
             const cookies = new Cookies();
             const token = cookies.get('token');
             console.log(job);
-            const response = await axios.patch(`https://rbrcareers.vercel.app/admin/job/${job._id}`, job, {
+            const response = await axios.patch(`https://rbrcareers-seven.vercel.app/admin/job/${job._id}`, job, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`

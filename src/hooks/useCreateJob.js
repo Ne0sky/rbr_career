@@ -14,7 +14,7 @@ const useCreateJob = () => {
         const token = cookies.get('token');
 
         try {
-            const response = await axios.post('https://rbrcareers.vercel.app/admin/job', formData, {
+            const response = await axios.post('https://rbrcareers-seven.vercel.app/admin/job', formData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
