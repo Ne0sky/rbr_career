@@ -1,23 +1,15 @@
 import React from 'react';
 import Service_section from '../Components/Service_section';
 import Marquee from "react-fast-marquee";
-import CircularProgress from '@mui/material/CircularProgress';
 import { Link, NavLink } from 'react-router-dom';
 import teamData from '../data/Team';
 import { MdArrowOutward } from "react-icons/md";
 import TeamCard from '../Components/TeamCard';
 import CountUp from 'react-countup';
-import { useInView } from 'react-intersection-observer';
-import { useRef } from 'react';
 import Toolslist from '../Components/Toolslist';
 const Home = () => {
-  const { ref, inView } = useInView();
-  const startCountingRef = useRef(false);
 
-  if (inView && !startCountingRef.current) {
-    startCountingRef.current = true;
-  }
- 
+
   return (
     <div className='font-main  flex flex-col px-4 mt-20  w-full  items-center overflow-x-hidden  justify-center '>
       <div className='flex hero w-screen min-h-screen justify-center flex-col md:flex-row-reverse px-4 md:px-8 lg:px-32'>
