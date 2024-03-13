@@ -19,10 +19,10 @@ const Home = () => {
   }
  
   return (
-    <div className='font-main  flex flex-col px-4   w-full  items-center overflow-x-hidden  justify-center '>
+    <div className='font-main  flex flex-col px-4 mt-20  w-full  items-center overflow-x-hidden  justify-center '>
       <div className='flex hero w-screen min-h-screen justify-center flex-col md:flex-row-reverse px-4 md:px-8 lg:px-32'>
-      <div className='lg:w-1/2 w-full md:flex justify-center hidden  items-center '>
-      <img className='w-96 md:w-80 lg:w-[450px] rounded-xl' src="/hero.png" alt="" />
+      <div className='lg:w-1/2 w-full md:flex justify-center items-center '>
+      <img className='w-80 md:w-80 lg:w-[450px] rounded-xl' src="/hero.png" alt="" />
       </div>
       <div className='lg:w-1/2 py-8 w-full flex justify-center items-start flex-col'>
         <h1 className='text-2xl lg:text-4xl border-l-4 border-blue-800 px-4 font-bold mb-4 text-black'>Elevate Your Business with  <span className='font-extrabold text-blue-800'>Tailor-Made Tech Brilliance!</span></h1>

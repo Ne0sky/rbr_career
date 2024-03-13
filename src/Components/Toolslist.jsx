@@ -19,7 +19,7 @@ import { FaJenkins } from "react-icons/fa";
 
 const Toolslist = () => {
   return (
-    <div className='w-full py-8 hero mt-16'>
+    <div className='w-full py-8  mt-16'>
         <Marquee gradient gradientColor='#F5F0EA'>
            
             <FaNodeJs className='text-6xl mx-6  text-green-500'/>
