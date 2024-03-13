@@ -37,18 +37,22 @@ const Careers = () => {
       ),
     },
   ];
- 
+
   const handleApply = (_id) => {
     console.log('Applying for job with ID:', _id);
     window.open(`/job/${_id}`, '_blank');
   };
 
   return (
-    <div className='font-main flex flex-col w-full items-center overflow-x-hidden justify-center'>
-      <div className='bg-gray-200 w-full banner text-center overflow-x-hidden space-y-8 py-16'>
-        <p className='text-2xl md:text-3xl lg:text-4xl font-semibold'>Become part of our team!</p>
-        <p className='text-xl'>Browse through our careers to be a part of Raudra Technologies</p>
+    <div className='font-main flex flex-col relative w-full h-full items-center overflow-x-hidden mt-20'>
+      <div className='bg-gray-200 flex relative w-full h-72 banner text-center overflow-x-hidden'>
+        <img src="/career.jpg" className='object-cover h-72 w-full filter brightness-50 saturate-150   z-0' alt="" />
+        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white'>
+          <p className='text-2xl md:text-3xl lg:text-4xl w-full font-semibold'>Become part of our team!</p>
+          <p className='text-xl hidden md:block'>Browse through our careers to be a part of Raudra Technologies</p>
+        </div>
       </div>
+
       <div className='w-full py-8 px-1 flex flex-col justify-center items-center'>
         <p className='text-2xl font-semibold py-8'>Job Openings</p>
         {isLoading ? (
@@ -82,6 +86,23 @@ const Careers = () => {
           />
         </div>
       </div>
+      <div class="flex flex-col md:flex-row justify-center gap-8">
+    <div class="bg-white rounded-lg shadow-md p-6 w-full md:w-80">
+        <h2 class="text-2xl font-semibold mb-4">Innovation</h2>
+        <p>Work On Technologies Of The Future, Stay Connected To Everything That Is Happening And Be A Part Of The Modern Tech-Revolution</p>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md p-6 w-full md:w-80">
+        <h2 class="text-2xl font-semibold mb-4">Growth</h2>
+        <p>Our Culture Is Built On The Philosophy Of Mutual Growth And Becoming The Best Version Of Yourself- As An Employee And As A Person</p>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md p-6 w-full md:w-80">
+        <h2 class="text-2xl font-semibold mb-4">Balance</h2>
+        <p>We Believe In Balance. Working, Learning And Fun Are Equally Important. We Never Compromise On Our Training Sessions And Fun Times</p>
+    </div>
+</div>
+
     </div>
   );
 }

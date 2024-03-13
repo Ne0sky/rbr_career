@@ -20,7 +20,7 @@ import { FaJenkins } from "react-icons/fa";
 const Toolslist = () => {
   return (
     <div className='w-full py-8  mt-16'>
-        <Marquee gradient gradientColor='#F5F0EA'>
+        <Marquee autoFill gradient >
            
             <FaNodeJs className='text-6xl mx-6  text-green-500'/>
             <FaReact className='text-6xl mx-6  text-blue-500'/>
