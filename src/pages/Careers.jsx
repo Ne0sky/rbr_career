@@ -7,6 +7,7 @@ import { IconContext } from "react-icons";
 import JobCard from '../Components/JobCard';
 import useGetJobs from '../hooks/useGetJobs';
 import CircularProgress from '@mui/material/CircularProgress';
+import Service_card from '../Components/Service_card';
 
 const Careers = () => {
   const { data: jobs, isLoading, isError } = useGetJobs();
@@ -59,9 +60,11 @@ const Careers = () => {
           <CircularProgress />
         ) : isError ? (
           <p>Error fetching data</p>
-        ) : jobs ? (
+        ) : jobs  && jobs.length>0 ?(
           <DataTable columns={columns} rows={jobs} />
-        ) : null}
+        ) : (
+          <p className="text-lg bg-neutral-200 p-4 rounded">No open positions available right now.</p>
+        )}
         <div className='w-full px-2 sm:flex md:hidden lg:hidden'>
           {filterData && filterData.map((job) => (
             <JobCard key={job._id} title={job.title} openings={job.openings} location={job.location} date={job.postedOn} type={job.type} apply={() => handleApply(job._id)} />
@@ -86,22 +89,17 @@ const Careers = () => {
           />
         </div>
       </div>
+      <div className='flex flex-col justify-center items-center py-12'>
+      <h3 className='text-2xl font-bold py-8'>Why should you join Raudra Technologies ?</h3>
       <div class="flex flex-col md:flex-row justify-center gap-8">
-    <div class="bg-white rounded-lg shadow-md p-6 w-full md:w-80">
-        <h2 class="text-2xl font-semibold mb-4">Innovation</h2>
-        <p>Work On Technologies Of The Future, Stay Connected To Everything That Is Happening And Be A Part Of The Modern Tech-Revolution</p>
-    </div>
+       
+      <Service_card src='/innovation.png' heading='Innovation' desc='Work On Technologies Of The Future, Stay Connected To Everything That Is Happening '/>
+      <Service_card src='/growth.png' heading='Growth' desc='Our Culture Is Built On The Philosophy Of Mutual Growth And Becoming The Best Version Of Yourself'/>
+      <Service_card src='/balance.png' heading='Balance' desc='We Believe In Balance. Working, Learning And Fun Are Equally Important. '/>
+      </div>
+      </div>
 
-    <div class="bg-white rounded-lg shadow-md p-6 w-full md:w-80">
-        <h2 class="text-2xl font-semibold mb-4">Growth</h2>
-        <p>Our Culture Is Built On The Philosophy Of Mutual Growth And Becoming The Best Version Of Yourself- As An Employee And As A Person</p>
-    </div>
-
-    <div class="bg-white rounded-lg shadow-md p-6 w-full md:w-80">
-        <h2 class="text-2xl font-semibold mb-4">Balance</h2>
-        <p>We Believe In Balance. Working, Learning And Fun Are Equally Important. We Never Compromise On Our Training Sessions And Fun Times</p>
-    </div>
-</div>
+      
 
     </div>
   );
