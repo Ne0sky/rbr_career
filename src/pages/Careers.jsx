@@ -80,13 +80,13 @@ const Careers = () => {
       <div className='w-full  py-8 px-1 flex flex-col justify-center items-center'>
         <p className='text-2xl font-semibold py-8'>Job Openings</p>
         {/* Search form */}
-        <div className="flex flex-col px-4 md:flex-row justify-center mb-8 hero py-16 w-full gap-4">
+        <div className="flex flex-col px-4 md:flex-row justify-center mb-8 bg-zinc-200 py-16 w-full gap-4">
           <input
             type="text"
             placeholder="Title"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="p-2 border border-gray-300 rounded-md"
+            className="p-2 border shadow-lg border-gray-300 rounded-md"
           />
           <div className='flex items-center gap-2'>
           <input
@@ -94,18 +94,18 @@ const Careers = () => {
             placeholder="Location"
             value={searchLocation}
             onChange={(e) => setSearchLocation(e.target.value)}
-            className="p-2 border border-gray-300 w-1/2 rounded-md"
+            className="p-2 border  shadow-lg border-gray-300 w-1/2 rounded-md"
           />
           <input
             type="text"
             placeholder="Type"
             value={searchType}
             onChange={(e) => setSearchType(e.target.value)}
-            className="p-2 border border-gray-300 w-1/2 rounded-md"
+            className="p-2 border  shadow-lg border-gray-300 w-1/2 rounded-md"
           />
           </div>
           <button onClick={filterJobs} className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center gap-2">Search <IoSearch/></button>
-          <button onClick={resetFilters} className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md">Reset Filters</button>
+          <button onClick={resetFilters} className="bg-gray-500 hover:bg-gray-600 text-white text-gray-800 px-4 py-2 rounded-md">Reset Filters</button>
         </div>
         {/* Job data table */}
         {isLoading ? (
@@ -144,9 +144,10 @@ const Careers = () => {
       </div>
 
       {/* Why should you join section */}
-      <div className='flex flex-col justify-center items-center py-12'>
-        <h3 className='text-2xl font-bold py-8'>Why should you join Raudra Technologies ?</h3>
-        <div class="flex flex-col md:flex-row justify-center gap-8">
+      <div className='flex flex-col justify-center items-center px-4 py-16'>
+        <h3 className='text-2xl font-bold py-2 text-center'>Why should you join Raudra Technologies ?</h3>
+        <div className='bg-blue-500 w-40 h-1'></div>
+        <div class="flex flex-col md:flex-row py-16 justify-center gap-8">
           <Service_card src='/innovation.png' heading='Innovation' desc='Work On Technologies Of The Future, Stay Connected To Everything That Is Happening '/>
           <Service_card src='/growth.png' heading='Growth' desc='Our Culture Is Built On The Philosophy Of Mutual Growth And Becoming The Best Version Of Yourself'/>
           <Service_card src='/balance.png' heading='Balance' desc='We Believe In Balance. Working, Learning And Fun Are Equally Important. '/>
