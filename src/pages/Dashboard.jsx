@@ -170,10 +170,10 @@ const Dashboard = () => {
           className="text-white rounded-md bg-blue-500 hover:bg-blue-700 flex items-center gap-1 px-2 py-1"
           state={{ job }}
         >
-          <FaEdit />Edit
+          <FaEdit  /><p className='hidden md:block'>Edit</p>
         </Link>
-        <button onClick={() => handleDelete(job._id)} className="rounded-md bg-rose-500 hover:bg-rose-700 text-white flex items-center gap-1 p-1">
-          <MdDeleteSweep />Delete
+        <button onClick={() => handleDelete(job._id)} className="rounded-md bg-rose-500 hover:bg-rose-700 text-white flex items-center gap-1 p-2 md:p-1">
+          <MdDeleteSweep /><p className='hidden md:block'>Delete</p>
         </button>
       </div>
     </div>
