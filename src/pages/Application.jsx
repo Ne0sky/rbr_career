@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { TiDeleteOutline } from "react-icons/ti";
 import useSubmitApplication from '../hooks/useSubmitApplication';
 import { FaPaperPlane } from "react-icons/fa";
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
+import toast from 'react-hot-toast';
 
 const Application = () => {
     const { id } = useParams();
@@ -14,12 +15,40 @@ const Application = () => {
     const [applicantName, setApplicantName] = useState('');
     const [applicantEmail, setApplicantEmail] = useState('');
     const [applicantPhone, setApplicantPhone] = useState('');
-    const [experience, setExpericience] = useState('');
+    const [experience, setExperience] = useState('');
     const [degree, setDegree] = useState('');
     const [institute, setInstitute] = useState('');
     const [qualifications, setQualifications] = useState([]);
     const [errorText, setErrorText] = useState('');
     const [semester, setSemester] = useState('');
+    const [phoneError, setPhoneError] = useState('');
+
+    
+    useEffect(() => {
+        const preventMouseWheelScroll = (e) => {
+            if (document.activeElement.type === 'number') {
+                e.preventDefault();
+            }
+        };
+
+        window.addEventListener('wheel', preventMouseWheelScroll, { passive: false });
+
+        return () => {
+            window.removeEventListener('wheel', preventMouseWheelScroll);
+        };
+    }, []);
+
+    const handlePhoneChange = (e) => {
+        const value = e.target.value;
+        if (value.length > 10) {
+            setPhoneError('Phone number should be 10 digits');
+        } else {
+            setPhoneError('');
+        }
+        setApplicantPhone(value);
+    };
+
+    
 
     const handleAddQualification = () => {
         if (degree !== '' && institute !== '')
@@ -66,6 +95,30 @@ const Application = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const phonePattern = /^\d{10}$/; 
+        if (applicantPhone.length !== 10 && !phonePattern.test(applicantPhone) ) {
+            setPhoneError('Invalid phone number');
+            toast.error('Invalid phone number');
+            return;
+        }
+        if (qualifications.length === 0) {
+            toast.error('Please add at least one qualification');
+            return;
+        }
+        if (!resume) {
+            toast.error('Please upload your resume');
+            return;
+        }
+     
+        if (applicantName === '' || applicantPhone === '' || experience === '' || semester === '') {
+            toast.error('Please fill in all the fields');
+            return;
+        }
+        if(!applicantEmail.contains('@') && !applicantEmail.contains('.')){
+            toast.error('Please enter a valid email');
+            return;
+        }
+
         const formData = new FormData();
         formData.append('resume', resume);
         formData.append('jobId', jobId);
@@ -93,7 +146,7 @@ const Application = () => {
         setQualifications([]);
         setDegree('');
         setInstitute('');
-        setExpericience('');
+        setExperience('');
         setSemester('');
     };
 
@@ -130,19 +183,29 @@ const Application = () => {
             <form className="max-w-md  px-4" >
                 <div className="mb-4">
                 </div>
-                <label className="block mb-2 text-xl font-semibold" htmlFor="resume">Personal Details</label>
+                <label className="block mb-2 text-xl font-semibold" >Personal Details</label>
 
                 <div className="mb-4">
                     <TextField className={input_style} type="text" required label='Full Name' id="applicantName" value={applicantName} onChange={(e) => setApplicantName(e.target.value)} />
                 </div>
                 <div className="mb-4">
-                    <TextField className={input_style} label='Email Address' required type="email" id="applicantEmail" value={applicantEmail} onChange={(e) => setApplicantEmail(e.target.value)} />
+                    <TextField className={input_style} label='Email Address' required type="email" id="applicantEmail" value={applicantEmail} onChange={(e) => setApplicantEmail(e.target.value)}/>
                 </div>
                 <div className="mb-4">
-                    <TextField className={input_style} type="tel" required id="applicantPhone" label='Phone Number' value={applicantPhone} onChange={(e) => setApplicantPhone(e.target.value)} />
-                </div>
+            <TextField
+                className={input_style}
+                type="text"
+                required
+                id="applicantPhone"
+                label="Phone Number"
+                value={applicantPhone}
+                onChange={handlePhoneChange}
+                error={!!phoneError}
+                helperText={phoneError}
+            />
+        </div>
                 <div className='mb-4'>
-                    <TextField className={input_style} type="number" required id="experience" label='Years of Experience' value={experience} onChange={(e) => setExpericience(e.target.value)} />
+                    <TextField className={input_style} type="number" required id="experience" label='Years of Experience' value={experience} onChange={(e) => setExperience(e.target.value)} />
                 </div>
                 <label className="block text-xl font-semibold">Qualifications</label>
                 <div className=" flex w-full flex-wrap gap-2">
