@@ -114,7 +114,7 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="max-w-4xl min-h-screen font-main px-2 mx-auto py-24">
+        <div className="max-w-4xl min-h-screen mt-20 font-main px-2 mx-auto py-24">
             <Link className='float-right flex items-center gap-2 bg-amber-500 p-2 rounded text-white font-semibold' to='/admin/create_job'>Create new Job<IoMdCreate/></Link>
             <h2 className="text-3xl font-semibold mb-4">List of all active jobs {jobs.length}</h2>
             <h3 className='text-xl font-semibold flex items-center gap-2'>Filters<FaFilter/></h3>
