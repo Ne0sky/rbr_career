@@ -40,14 +40,14 @@ const Applicant = () => {
             }
             </div>
           
-            <p className='font-medium text-zinc-800'>Semester: <span className='text-lg font-semibold text-black'> {applicant.semester}</span></p>
+            <p className='font-medium text-zinc-800'>Semester: <span className=' '> {applicant.semester}</span></p>
           
           </div>
           
           </div>
           <div className='py-8'>
             <h2 className='text-xl font-semibold'>Experience</h2>
-            <p className='text-lg '>{applicant.yearsOfExperience}</p>
+            <p className='text-lg '>{applicant.yearsOfExperience} years</p>
           </div>
           <div>
           <h2 className='text-xl font-semibold'>Resume</h2>

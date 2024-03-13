@@ -98,6 +98,32 @@ const Application = () => {
     };
 
     const input_style = "rounded  w-full"
+    
+    // Options for the semester dropdown
+    const semesterOptions = [
+        "1st Semester",
+        "2nd Semester",
+        "3rd Semester",
+        "4th Semester",
+        "5th Semester",
+        "6th Semester",
+        "7th Semester",
+        "8th Semester",
+        "Passed Out"
+    ];
+
+    const degreeOptions = [
+        'B.Tech',
+        'M.Tech',
+        'B.Sc',
+        'M.Sc',
+        'B.Eng',
+        'M.Eng',
+        'BCA',
+        'MCA',
+    ]
+
+
     return (
         <div className='mx-auto w-full mt-20 flex flex-col font-main items-center justify-center py-12'>
             <h1 className='text-xl md:text-2xl lg:text-3xl font-bold pb-8'>Job Application Form</h1>
@@ -133,8 +159,13 @@ const Application = () => {
                 </div>
                 <div className='flex gap-4 flex-col items-end'>
                     <div className='flex gap-4 py-4'>
-                        <div >
-                            <TextField label='Degree' className={input_style} type="text" id="degree" value={degree} onChange={(e) => setDegree(e.target.value)} />
+                        <div>
+                            <select className='py-4 border px-4 border-gray-300 w-full rounded' id="degree" value={degree} onChange={(e) => setDegree(e.target.value)}>
+                                <option value="">Select Degree</option>
+                                {degreeOptions.map((option, index) => (
+                                    <option key={index} value={option}>{option}</option>
+                                ))}
+                            </select>
                         </div>
                         <div >
                             <TextField label='College' className={input_style} type="text" id="institute" value={institute} onChange={(e) => setInstitute(e.target.value)} />
@@ -143,7 +174,13 @@ const Application = () => {
                     <div className='flex items-start justify-start gap-1'><button className="mb-4  bg-gray-300 p-2 rounded text-sm" type='button' onClick={handleAddQualification}>Submit Qualification</button><span className='text-2xl text-red-500'>*</span></div>
                 </div>
                 <div className="mb-4">
-                    <TextField className={input_style} type="text" id="semester" label='Semester' value={semester} onChange={(e) => setSemester(e.target.value)} />
+                    {/* Dropdown for semester */}
+                    <select className='py-4 border px-4 border-gray-300 w-full rounded' id="semester" value={semester} onChange={(e) => setSemester(e.target.value)}>
+                        <option value="">Select Semester</option>
+                        {semesterOptions.map((option, index) => (
+                            <option key={index} value={option}>{option}</option>
+                        ))}
+                    </select>
                 </div>
                 <label className="block mb-2 text-xl font-semibold" htmlFor="resume">Resume</label>
                 <div className="flex items-center justify-center w-full" onDrop={(e) => handleDrop(e)} onDragOver={(e) => handleDragOver(e)} onDragEnter={(e) => handleDragEnter(e)} onDragLeave={(e) => handleDragLeave(e)}>
