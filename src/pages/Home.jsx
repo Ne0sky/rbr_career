@@ -9,6 +9,7 @@ import TeamCard from '../Components/TeamCard';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
 import { useRef } from 'react';
+import Toolslist from '../Components/Toolslist';
 const Home = () => {
   const { ref, inView } = useInView();
   const startCountingRef = useRef(false);
@@ -41,7 +42,7 @@ const Home = () => {
       <div className='bg-blue-600 z-0  w-40 h-1 rounded-full my-1'></div>
       </div>
 
-      <div className='flex flex-col z-10 md:px-16 py-16 lg:flex-row justify-center items-center'>
+      <div className='flex flex-col border-b z-10 md:px-16 py-16 lg:flex-row justify-center items-center'>
         <div className='w-full lg:w-1/2 grid grid_cols-1 gap-8 md:grid-cols-2 justify-center items-start'>
           <div className=''>
             <h1 className='text-xl font-bold text-blue-900'>Engineering Mindset</h1>
@@ -64,6 +65,11 @@ const Home = () => {
           <img className='w-[350px] md:w-[450px] ' src="/more_than_dev.svg" alt="" />
         </div>
       </div>
+      </div>
+      {/* Tools */}
+      <div className='py-16 flex flex-col items-center justify-center w-screen'>
+        <h1 className='text-3xl font-bold '>Tools We Use</h1>
+        <Toolslist />
       </div>
       {/* Global CLients */}
       <div className='py-16'>

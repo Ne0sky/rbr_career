@@ -12,7 +12,7 @@ const useGetJobApplications = (jobId) => {
         
     });
     const jobApplications = response.data.data;
-    
+    console.log('jobApplications:', jobApplications);
     return jobApplications;
   };
 
