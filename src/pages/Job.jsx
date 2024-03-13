@@ -55,7 +55,7 @@ const Job = () => {
           </div>
           
           <p className='bg-zinc-300 py-1 px-2 rounded w-44 text-sm'>Posted On: {new Date(job.postedOn).toLocaleDateString()}</p>
-          <button onClick={() => handleApply(id)} className='bg-blue-500 my-8 flex items-center gap-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+          <button onClick={() => handleApply(id)} className='bg-blue-500 my-8 flex items-center gap-2 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded'>
             Apply Now <MdArrowOutward/>
           </button>
         </div>
