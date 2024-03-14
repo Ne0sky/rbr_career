@@ -11,11 +11,11 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { BiSolidSad } from "react-icons/bi";
 import { RiFileExcel2Line } from "react-icons/ri";
-
+import { useLocation } from 'react-router-dom';
 const Job_Applicants = () => {
+  const { id } = useParams();
   const cookies = new Cookies();
   const token = cookies.get('token');
-  const { id } = useParams();
   const { data: jobApplications, isLoading, isError, error, refetch } = useGetJobApplications(id);
   const deleteApplicant = useDeleteApplicant(); 
 

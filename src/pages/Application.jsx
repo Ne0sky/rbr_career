@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { TiDeleteOutline } from "react-icons/ti";
 import useSubmitApplication from '../hooks/useSubmitApplication';
@@ -6,7 +6,7 @@ import { FaPaperPlane } from "react-icons/fa";
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
 import toast from 'react-hot-toast';
-import  validateEmail from '../utils/validate_email';
+import validateEmail from '../utils/validate_email';
 
 const Application = () => {
     const { id } = useParams();
@@ -18,13 +18,15 @@ const Application = () => {
     const [applicantPhone, setApplicantPhone] = useState('');
     const [experience, setExperience] = useState('');
     const [degree, setDegree] = useState('');
-    const [institute, setInstitute] = useState('');
+    const [college, setCollege] = useState('');
     const [qualifications, setQualifications] = useState([]);
     const [errorText, setErrorText] = useState('');
     const [semester, setSemester] = useState('');
     const [phoneError, setPhoneError] = useState('');
     const [university, setUniversity] = useState('');
-    
+    const [otherUniversity, setOtherUniversity] = useState('');
+    const otherUniversityRef = useRef(null);
+
     useEffect(() => {
         const preventMouseWheelScroll = (e) => {
             if (document.activeElement.type === 'number') {
@@ -38,6 +40,12 @@ const Application = () => {
             window.removeEventListener('wheel', preventMouseWheelScroll);
         };
     }, []);
+    useEffect(() => {
+        // Focus on the "Other University" input field when university is set to 'Others'
+        if (university === 'Others') {
+            otherUniversityRef.current.focus();
+        }
+    }, [university]);
 
     const handlePhoneChange = (e) => {
         const value = e.target.value;
@@ -49,22 +57,20 @@ const Application = () => {
         setApplicantPhone(value);
     };
 
-    
-
     const handleAddQualification = () => {
-        if (degree !== '' && institute !== '')
-            setQualifications([...qualifications, { degree: degree, institute: institute }]);
+        if (degree !== '' && college !== '' && university !== '' )
+            setQualifications([...qualifications, { degree: degree, college: college, university: university === 'Others' ? otherUniversity : university }]);
         setDegree('');
-        setInstitute('');
+        setCollege('');
+        setUniversity('');
+        setOtherUniversity('');
     };
-
 
     const handleRemoveQualification = (index) => {
         const newQualifications = [...qualifications];
         newQualifications.splice(index, 1);
         setQualifications(newQualifications);
     };
-
 
     const handleDragEnter = (e) => {
         e.preventDefault();
@@ -93,11 +99,10 @@ const Application = () => {
         }
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const phonePattern = /^\d{10}$/; 
-        if (applicantPhone.length !== 10 && !phonePattern.test(applicantPhone) ) {
+        const phonePattern = /^\d{10}$/;
+        if (applicantPhone.length !== 10 && !phonePattern.test(applicantPhone)) {
             setPhoneError('Invalid phone number');
             toast.error('Invalid phone number');
             return;
@@ -110,12 +115,12 @@ const Application = () => {
             toast.error('Please upload your resume');
             return;
         }
-     
+
         if (applicantName === '' || applicantPhone === '' || experience === '' || semester === '') {
             toast.error('Please fill in all the fields');
             return;
         }
-       
+
         if (!validateEmail(applicantEmail)) {
             toast.error('Invalid email address');
             return;
@@ -131,7 +136,8 @@ const Application = () => {
         formData.append('semester', semester);
         qualifications.forEach((qualification, index) => {
             formData.append(`qualifications[${index}][degree]`, qualification.degree);
-            formData.append(`qualifications[${index}][institute]`, qualification.institute);
+            formData.append(`qualifications[${index}][college]`, qualification.college);
+            formData.append(`qualifications[${index}][university]`, qualification.university);
         });
 
         await submitApplication(formData);
@@ -152,8 +158,8 @@ const Application = () => {
         setSemester('');
     };
 
-    const input_style = "rounded  w-full"
-    
+    const input_style = "rounded  w-full";
+
     // Options for the semester dropdown
     const semesterOptions = [
         "1st Semester",
@@ -176,8 +182,14 @@ const Application = () => {
         'M.Eng',
         'BCA',
         'MCA',
-    ]
+    ];
 
+    const universityOptions = [
+        'University 1',
+        'University 2',
+        'University 3',
+        'Others'
+    ];
 
     return (
         <div className='mx-auto w-full mt-20 flex flex-col font-main items-center justify-center py-12'>
@@ -191,21 +203,21 @@ const Application = () => {
                     <TextField className={input_style} type="text" required label='Full Name' id="applicantName" value={applicantName} onChange={(e) => setApplicantName(e.target.value)} />
                 </div>
                 <div className="mb-4">
-                    <TextField className={input_style} label='Email Address' required type="email" id="applicantEmail" value={applicantEmail} onChange={(e) => setApplicantEmail(e.target.value)}/>
+                    <TextField className={input_style} label='Email Address' required type="email" id="applicantEmail" value={applicantEmail} onChange={(e) => setApplicantEmail(e.target.value)} />
                 </div>
                 <div className="mb-4">
-            <TextField
-                className={input_style}
-                type="text"
-                required
-                id="applicantPhone"
-                label="Phone Number"
-                value={applicantPhone}
-                onChange={handlePhoneChange}
-                error={!!phoneError}
-                helperText={phoneError}
-            />
-        </div>
+                    <TextField
+                        className={input_style}
+                        type="text"
+                        required
+                        id="applicantPhone"
+                        label="Phone Number"
+                        value={applicantPhone}
+                        onChange={handlePhoneChange}
+                        error={!!phoneError}
+                        helperText={phoneError}
+                    />
+                </div>
                 <div className='mb-4'>
                     <TextField className={input_style} type="number" required id="experience" label='Years of Experience' value={experience} onChange={(e) => setExperience(e.target.value)} />
                 </div>
@@ -234,9 +246,26 @@ const Application = () => {
                             </select>
                         </div>
                         <div >
-                            <TextField label='College' className={input_style} type="text" id="institute" value={institute} onChange={(e) => setCollege(e.target.value)} />
+                            <TextField label='College' className={input_style} type="text" id="institute" value={college} onChange={(e) => setCollege(e.target.value)} />
                         </div>
-                        
+                        { university !== 'Others' &&
+                        <div>
+                            
+                            <select className='py-4 border px-4 border-gray-300 w-full rounded' id="university" value={university} onChange={(e) => setUniversity(e.target.value)}>
+                                <option value="">Select University</option>
+                                {universityOptions.map((option, index) => (
+                                    <option key={index} value={option}>{option}</option>
+                                ))}
+                            </select>
+                        </div>
+                        }
+                        {university === 'Others' && (
+                            <div >
+                                <TextField
+                                    inputRef={otherUniversityRef}
+                                 label='Other University' className={input_style} type="text" id="otherUniversity" value={otherUniversity} onChange={(e) => setOtherUniversity(e.target.value)} />
+                            </div>
+                        )}
                     </div>
                     <div className='flex items-start justify-start gap-1'><button className="mb-4  bg-gray-300 p-2 rounded text-sm" type='button' onClick={handleAddQualification}>Submit Qualification</button><span className='text-2xl text-red-500'>*</span></div>
                 </div>
@@ -253,7 +282,7 @@ const Application = () => {
                 <div className="flex items-center justify-center w-full" onDrop={(e) => handleDrop(e)} onDragOver={(e) => handleDragOver(e)} onDragEnter={(e) => handleDragEnter(e)} onDragLeave={(e) => handleDragLeave(e)}>
                     <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 hover:bg-gray-100 dark:border-gray-600">
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                            <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                        <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                             </svg>
                             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>

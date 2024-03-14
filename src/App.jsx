@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React,{ useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Careers from './pages/Careers';
@@ -13,10 +13,11 @@ import EditJobForm from './pages/EditJobForm';
 import Applicant from './pages/Applicant';
 import Dashboard from './pages/Dashboard';
 import Contact from './pages/Contact';
-import { useAuthContext } from './hooks/useAuthContext';
+import { AuthContext } from './context/AuthContext'
 
 function App() {
-  const { user } = useAuthContext();
+  const {user } = React.useContext(AuthContext);
+  console.log(user);
 
   return (
     <>
@@ -29,19 +30,16 @@ function App() {
           <Route path="/job/:id" element={<Job />} />
           <Route path="/apply/:id" element={<Application />} />
           <Route path="/contact" element={<Contact />} />
+         
           {/* Conditionally render admin routes if user exists */}
-          {user ? (
-            <>
-              <Route path="/admin/job_applicants/:id" element={<Job_Applicants />} />
+          
               <Route path="/admin/create_job" element={<CreateJobForm />} />
               <Route path="/admin/edit_job" element={<EditJobForm />} />
               <Route path="/admin/dashboard" element={<Dashboard />} />
               <Route path="/admin/applicant/:id" element={<Applicant />} />
-            </>
-          ) : (
-            // Redirect to login if user doesn't exist
-            <Route path="/admin/*" element={<Navigate to="/admin_login" />} />
-          )}
+              <Route path="/admin/job_applicants/:id" element={user? <Job_Applicants />:<Navigate to='/admin_login'/>} />
+
+            
         </Routes>
         <Footer />
       </Router>
