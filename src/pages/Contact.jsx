@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { FaPaperPlane } from "react-icons/fa";
 import toast from 'react-hot-toast'
+import { CircularProgress } from '@mui/material';
 const Contact = () => {
   const [email, setEmail] = useState('')
-  const [name, setName] = useState('')
+  const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -14,43 +15,40 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
-  
+
     try {
-      const response = await fetch(`api/contact/`, {
-        method: 'POST',
-        body: JSON.stringify({
-          email,
-          name,
-          message,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      const json = await response.json();
-  
-      if (!response.ok) {
-        setError(json.error);
-        setIsLoading(false);
-        toast.error(error, {
-          theme: 'dark',
-          position: 'bottom-right',
+        const response = await fetch(`https://rbrcareers-seven.vercel.app/contact/`, {
+            method: 'POST',
+            body: JSON.stringify({
+                email,
+                subject,
+                message,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
-      }
-  
-      if (response.ok) {
-        setIsLoading(false);
-        setEmail('')
-        setMessage('')
-        setName('')
-        toast.success('Message sent successfully')
-      }
+
+        const json = await response.json();
+        console.log(json);
+
+        if (json.message === 'Email sent') {
+            setEmail('');
+            setMessage('');
+            setSubject('');
+            toast.success('Message sent successfully');
+        } else {
+            setError(json.error);
+            toast.error('Message not sent');
+        }
     } catch (error) {
-      setError(error.message);
-      setIsLoading(false);
+        setError(error.message);
+        toast.error('Message not sent');
+    } finally {
+        setIsLoading(false);
     }
-  };
+};
+
 
   return (
     <div className='  font-main flex flex-col overflow-x-hidden max-w-screen md:flex-row gap-8  min-h-screen font-primary justify-center items-center px-4 my-20'>
@@ -84,17 +82,7 @@ const Contact = () => {
         <div 
         className='flex md:gap-4 flex-col  items-center min-w-full'>
 
-        <div className='my-1 min-w-full'>
-        <label>Name</label>
-        <input type="text"
-        className='block min-w-full py-2 placeholder:italic px-4 my-2 border border-zinc-600 rounded-lg '
-        placeholder='Full Name'
-        name="name"
-        onChange={(e)=>setName(e.target.value)} 
-        value={name}
-        required={true}
-        />
-        </div>
+       
 
         <div className='my-1 min-w-full'>
         <label>Email</label>
@@ -104,6 +92,18 @@ const Contact = () => {
         placeholder='abc@gmail.com'
         onChange={(e)=>setEmail(e.target.value)} 
         value={email}
+        required={true}
+        />
+        </div>
+
+        <div className='my-1 min-w-full'>
+        <label>Subject</label>
+        <input type="text"
+        className='block min-w-full py-2 placeholder:italic px-4 my-2 border border-zinc-600 rounded-lg '
+        placeholder='Full Name'
+        name="name"
+        onChange={(e)=>setSubject(e.target.value)} 
+        value={subject}
         required={true}
         />
         </div>
@@ -119,7 +119,7 @@ const Contact = () => {
         required={true}
         />
         </div>
-        <button type="submit" className='bg-blue-500 flex items-center gap-2 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded-lg my-4' disabled={isLoading}>Send <FaPaperPlane/></button>
+        <button type="submit" disabled={isLoading} className='bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md flex items-center gap-2'>Send Message {isLoading ? <CircularProgress size={20} color='inherit'/> : <FaPaperPlane size={20}/>} </button>
         </div>
 
 
