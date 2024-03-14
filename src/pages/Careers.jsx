@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import DataTable from '../Components/DataTable';
 import ReactPaginate from "react-paginate";
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import JobCard from '../Components/JobCard';
 import useGetJobs from '../hooks/useGetJobs';
 import CircularProgress from '@mui/material/CircularProgress';
-import Service_card from '../Components/Service_card';
+import { GrPowerReset } from "react-icons/gr";
 import { IoSearch } from "react-icons/io5";
 import WhyJoin from '../Components/WhyJoin';
+import { PiSuitcaseSimpleBold } from "react-icons/pi";
+
 
 const Careers = () => {
   const { data: jobs, isLoading, isError } = useGetJobs();
@@ -17,7 +18,7 @@ const Careers = () => {
   const [searchLocation, setSearchLocation] = useState('');
   const [searchType, setSearchType] = useState('');
   const [page, setPage] = useState(0);
-  const [n] = useState(3); // Number of items per page
+  const [n] = useState(4); // Number of items per page
 
   
   useEffect(() => {
@@ -70,9 +71,9 @@ const Careers = () => {
 
       {/* Job openings section */}
       <div className='w-full  py-8 px-1 flex flex-col justify-center items-center'>
-        <p className='text-2xl font-semibold py-8'>Job Openings</p>
+        <p className='text-2xl font-semibold py-8 flex items-center gap-4'><PiSuitcaseSimpleBold/>Open Job Positions</p>
         {/* Search form */}
-        <div className="flex flex-col px-4 md:flex-row justify-center mb-8 bg-zinc-200 py-16 w-full gap-4">
+        <div className="flex flex-col px-4 md:flex-row justify-center  pt-16 pb-4  w-full md:w-1/2 gap-4">
           <input
             type="text"
             placeholder="Title"
@@ -96,9 +97,13 @@ const Careers = () => {
               className="p-2 border shadow-lg border-gray-300 w-1/2 rounded-md"
             />
           </div>
-          <button onClick={filterJobs} className="bg-blue-500 hover:bg-blue-700 text-white text-center px-4 py-2 rounded-md flex items-center justify-center gap-2"><p>Search</p> <IoSearch/></button>
-          <button onClick={resetFilters} className="bg-gray-500 hover:bg-gray-600 text-white  px-4 py-2 rounded-md">Reset Filters</button>
+          
+          
         </div>
+        <div className='flex items-center pb-16 gap-4'>
+        <button onClick={filterJobs} className="bg-blue-500 hover:bg-blue-700 text-white text-center px-4 py-2 rounded-md flex items-center justify-center gap-2"><p>Search</p> <IoSearch/></button>
+          <button onClick={resetFilters} className="bg-gray-500 hover:bg-gray-600 text-white  px-4 py-2 rounded-md flex items-center justify-center gap-2">Reset  <GrPowerReset/></button>
+          </div>
         {/* Job data table */}
         {isLoading ? (
           <CircularProgress />
@@ -115,7 +120,7 @@ const Careers = () => {
         )}
         {/* Pagination */}
         <ReactPaginate
-          pageCount={jobs  && Math.ceil(jobs.length / n)}
+          pageCount={jobs ? Math.ceil(jobs.length / n): 0} // Adjust as needed
           pageRangeDisplayed={3} // Adjust as needed
           marginPagesDisplayed={1} // Adjust as needed
           activeClassName={"Pg_active"}
