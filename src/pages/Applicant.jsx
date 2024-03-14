@@ -34,7 +34,8 @@ const Applicant = () => {
                 applicant.qualifications.map((qualification, index) => (
                     <span key={index} className='flex  bg-zinc-100  rounded-full w-auto gap-2 '>
                     <span className=''>Degree : {qualification.degree}</span>
-                    <span>College : {qualification.institute}</span>
+                    <span>College : {qualification.college}</span>
+                    <span>University: {qualification.university}</span>
                     </span>
                 ))
             }
