@@ -13,6 +13,7 @@ import CreateJobForm from './pages/CreateJobForm'
 import EditJobForm from './pages/EditJobForm'
 import Applicant from './pages/Applicant'
 import Dashboard from './pages/Dashboard'
+import Contact from './pages/Contact'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -32,6 +33,7 @@ function App() {
             <Route path='/admin/dashboard' element={<Dashboard />} />
             <Route path='/admin/applicant/:id' element={<Applicant/>} /> 
             <Route path='/apply/:id' element={<Application />} />
+            <Route path='/contact' element={<Contact />} />
           </Routes>
         <Footer/>
       </Router>

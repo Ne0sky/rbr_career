@@ -46,6 +46,9 @@ const Navbar = () => {
           <li>
             <NavLink to='/careers' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Careers</NavLink>
           </li>
+          <li>
+            <NavLink to='/contact' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Contact</NavLink>
+          </li>
           {user && (
             <ul className='space-y-2'>
               <li>
@@ -66,6 +69,9 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink to='/careers' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Careers</NavLink>
+        </li>
+        <li>
+          <NavLink to='/contact' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Contact</NavLink>
         </li>
         {user && (
           <ul className='flex items-center gap-6'>

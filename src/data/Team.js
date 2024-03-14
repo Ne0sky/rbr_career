@@ -2,21 +2,21 @@
 const teamData = [
     {
         id: 1,
-        name: 'Rabindrbabu Rabula',
+        name: 'RavindraBabu  Rabula',
         role: 'CEO, Raudra Technologies',
         image: '/hero.avif',
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     },
     {
         id: 2,
-        name: 'Jane Doe',
+        name: 'Udaya Ravula',
         role: 'CTO, Raudra Technologies',
         image: '/hero.avif',
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     },
     {
         id: 3,
-        name: 'James Smith',
+        name: 'Divya Desi reddi',
         role: 'CFO, Raudra Technologies',
         image: '/hero.avif',
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
