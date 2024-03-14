@@ -14,8 +14,9 @@ import EditJobForm from './pages/EditJobForm'
 import Applicant from './pages/Applicant'
 import Dashboard from './pages/Dashboard'
 import Contact from './pages/Contact'
-
+import { useAuthContext } from './hooks/useAuthContext'
 function App() {
+  const { user } = useAuthContext()
   const [count, setCount] = useState(0)
 
   return (
