@@ -30,20 +30,24 @@ const Job = () => {
             <p className='font-semibold'>Type: {job.type}</p>
           </div>
           <div className='pb-2 pt-4'>
-            <h2 className='text-xl font-semibold'>Description</h2>
-            <p className='text-lg '> {job.description.responsibilities}</p>
+            <h2 className='text-xl font-semibold'>Responsibilities</h2>
+            {
+              job.description.responsibilities.split('\n').map((responsibility, index) => (
+                <li key={index} className='text-lg'>{responsibility.trim()}</li>
+              ))
+            }
           </div>
           <div className='py-2'>
             <h2 className='text-xl font-semibold'>Requirements</h2>
             <ul className="list-disc pl-6">
-              {job.description.requirements.split(',').map((requirement, index) => (
+              {job.description.requirements.split('\n').map((requirement, index) => (
                 <li key={index} className='text-lg'>{requirement.trim()}</li>
               ))}
             </ul>
           </div>
           <div className='py-2'>
             <h2 className='text-xl font-semibold'>Salary</h2>
-            <p className='text-lg '> {job.description.salary}</p>
+            <p className='text-lg '> {job.description.salary}/- per month</p>
           </div>
           <div className='py-2'>
             <h2 className='text-xl font-semibold'>Openings</h2>

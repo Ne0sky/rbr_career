@@ -27,7 +27,7 @@ const Dashboard = () => {
     const [sortLabel, setSortLabel] = useState('Recent First');
     const [page, setPage] = useState(0);
     const [filterData, setFilterData] = useState();
-    const n = 3;
+    const n = 5;
     useEffect(() => {
         if (jobs) {
             setSortedJobs(jobs);
@@ -114,11 +114,11 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="max-w-4xl min-h-screen mt-20 font-main px-2 mx-auto py-24">
+        <div className="max-w-4xl min-h-screen w-full mt-20 font-main px-2 mx-auto py-24">
             <Link className='float-right flex items-center gap-2 bg-amber-500 p-2 rounded text-white font-semibold' to='/admin/create_job'>Create new Job<IoMdCreate/></Link>
             <h2 className="text-3xl font-semibold mb-4">List of all active jobs {jobs.length}</h2>
             <h3 className='text-xl font-semibold flex items-center gap-2'>Filters<FaFilter/></h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 py-4">
+            <div className="grid grid-cols-1 w-full md:grid-cols-2 lg:grid-cols-5 gap-4 py-4">
                 <input
                     type="text"
                     placeholder="job title..."
@@ -142,9 +142,9 @@ const Dashboard = () => {
                     <option value="Full Time">Full Time</option>
                     <option value="Internship">Internship</option>
                 </select>
-                <button onClick={handleSearch} className=" bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center gap-2 justify-center">Search <IoSearch/></button>
-                <button onClick={handleReset} className=" bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md">Reset Filters</button>
-
+                <button onClick={handleSearch} className=" bg-blue-500   hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center  justify-center gap-8 "><span> Search </span><IoSearch/></button>
+                <button onClick={handleReset} className=" bg-gray-300   hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md">Reset Filters</button>
+               
             </div>
             <button onClick={handleSortByDate} className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md mb-4">
                 {sortLabel}
