@@ -23,7 +23,7 @@ const Application = () => {
     const [errorText, setErrorText] = useState('');
     const [semester, setSemester] = useState('');
     const [phoneError, setPhoneError] = useState('');
-
+    const [university, setUniversity] = useState('');
     
     useEffect(() => {
         const preventMouseWheelScroll = (e) => {
@@ -216,7 +216,8 @@ const Application = () => {
                         <div key={index} className=" px-2 py-1 bg-gray-200 rounded flex items-center justify-between mb-2">
                             <div className='text-xs flex items-center justify-center gap-2'>
                                 <p>{qualification.degree}</p>
-                                <p>{qualification.institute}</p>
+                                <p>{qualification.college}</p>
+                                <p>{qualification.university}</p>
                             </div>
                             <button onClick={() => handleRemoveQualification(index)}><TiDeleteOutline style={{ fontSize: '16px' }} /></button>
                         </div>
@@ -233,8 +234,9 @@ const Application = () => {
                             </select>
                         </div>
                         <div >
-                            <TextField label='College' className={input_style} type="text" id="institute" value={institute} onChange={(e) => setInstitute(e.target.value)} />
+                            <TextField label='College' className={input_style} type="text" id="institute" value={institute} onChange={(e) => setCollege(e.target.value)} />
                         </div>
+                        
                     </div>
                     <div className='flex items-start justify-start gap-1'><button className="mb-4  bg-gray-300 p-2 rounded text-sm" type='button' onClick={handleAddQualification}>Submit Qualification</button><span className='text-2xl text-red-500'>*</span></div>
                 </div>
