@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         'main':['Montserrat'],
+        'secondary':['Poppins']
       },
     },
   },

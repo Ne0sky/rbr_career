@@ -7,7 +7,7 @@ import { LuClock } from "react-icons/lu";
 
 const JobCard2 = ({ job, handleDelete }) => {
   return (
-    <div className="bg-neutral-100 border-l-2 border-blue-500 gap-4 flex items-center justify-between shadow-md p-4">
+    <div className=" border border-neutral-300 gap-4 flex items-center justify-between rounded-lg p-4">
       <div className='flex flex-col gap-2'>
         <h3 className="text-lg font-semibold">{job.title}</h3>
         <p className="rounded-full text-center py-1 px-2 bg-zinc-300">{job.type}</p>

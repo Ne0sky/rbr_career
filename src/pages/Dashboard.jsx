@@ -153,10 +153,10 @@ const Dashboard = () => {
                 <Suspense fallback={<CircularProgress />}>
                     {filterData && filterData.length > 0 ? (
                         filterData.map((job) => (
-                            <div key={job._id} className="bg-neutral-100 border-l-2 border-blue-500 gap-4 flex items-center justify-between shadow-md p-4">
+                            <div key={job._id} className=" border border-neutral-300 gap-4 flex items-center justify-between rounded-lg p-4">
                                 <div className='flex flex-col gap-2'>
                                     <h3 className="text-lg font-semibold">{job.title}</h3>
-                                    <p className="rounded-full text-center py-1 px-2 bg-zinc-300">{job.type}</p>
+                                    <p className="rounded-full w-40 text-center py-1 px-2 bg-zinc-300">{job.type}</p>
                                     <p className='flex items-center gap-2'><CiLocationOn className='text-xl' /> {job.location}</p>
                                     <p className="text-gray-600 flex items-center gap-2"><LuClock /> {new Date(job.postedOn).toLocaleDateString()}</p>
                                     <div className='flex items-center gap-4'>
