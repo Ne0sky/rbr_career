@@ -2,7 +2,7 @@
 const teamData = [
     {
         id: 1,
-        name: 'John Doe',
+        name: 'Rabindrbabu Rabula',
         role: 'CEO, Raudra Technologies',
         image: '/hero.avif',
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'

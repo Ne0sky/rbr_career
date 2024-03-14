@@ -6,7 +6,7 @@ const useGetJobs = () => {
   const getJobs = useCallback(async () => {
     const response = await axios.get('https://rbrcareers-seven.vercel.app/jobs/allJobs');
     const jobsData = response.data.data;
-
+    console.log('Jobs:', jobsData);
     return jobsData;
   }, []);
 

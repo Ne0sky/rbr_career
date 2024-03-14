@@ -11,19 +11,17 @@ import { IoSearch } from "react-icons/io5";
 
 const Careers = () => {
   const { data: jobs, isLoading, isError } = useGetJobs();
-  const [page, setPage] = useState(0);
   const [filterData, setFilterData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchLocation, setSearchLocation] = useState('');
   const [searchType, setSearchType] = useState('');
 
-  const n = 3;
-
   useEffect(() => {
     if (jobs) {
-      setFilterData(jobs.slice(page * n, (page + 1) * n));
+      setFilterData(jobs);
     }
-  }, [jobs, page]);
+  }, [jobs]);
+  
 
   const filterJobs = () => {
     if (jobs) {
@@ -33,9 +31,7 @@ const Careers = () => {
         job.type.toLowerCase().includes(searchType.toLowerCase())
       );
 
-      const paginatedJobs = filteredJobs.slice(page * n, (page + 1) * n);
-
-      setFilterData(paginatedJobs);
+      setFilterData(filteredJobs);
     }
   };
  
@@ -117,29 +113,12 @@ const Careers = () => {
         ) : (
           <p className="text-lg bg-neutral-200 p-4 rounded">No matching positions found.</p>
         )}
-        {/* Pagination */}
+        {/* Mobile view */}
         <div className='w-full px-2 sm:flex md:hidden lg:hidden'>
           {filterData.map((job) => (
             <JobCard key={job._id} title={job.title} openings={job.openings} location={job.location} date={job.postedOn} type={job.type} apply={() => handleApply(job._id)} />
           ))}
-          <ReactPaginate
-            containerClassName={"pagination"}
-            activeClassName={"Pg_active"}
-            pageClassName={"page-item"}
-            onPageChange={(event) => setPage(event.selected)}
-            breakLabel="..."
-            pageCount={Math.ceil(filterData.length / n)}
-            previousLabel={
-              <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
-                <AiFillLeftCircle />
-              </IconContext.Provider>
-            }
-            nextLabel={
-              <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
-                <AiFillRightCircle />
-              </IconContext.Provider>
-            }
-          />
+          
         </div>
       </div>
 
