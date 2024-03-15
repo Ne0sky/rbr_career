@@ -28,6 +28,9 @@ const Job = () => {
             <p className='text-2xl font-semibold text-blue-500'>{job.title}</p>
             <p className='font-semibold'>Job Requisition ID : {job._id}</p>
             <p className='font-semibold'>Type: {job.type}</p>
+            <button onClick={() => handleApply(id)} className='bg-blue-600 my-8 flex items-center gap-2 hover:bg-blue-700 text-white font-bold p-2 rounded'>
+            Apply Now <MdArrowOutward />
+          </button>
           </div>
           <div className='pb-2 pt-4'>
             <h2 className='text-xl font-semibold'>Responsibilities</h2>
@@ -65,7 +68,7 @@ const Job = () => {
           </div>
 
           <p className='bg-zinc-300 py-1 px-2 rounded w-44 text-sm'>Posted On: {new Date(job.postedOn).toLocaleDateString()}</p>
-          <button onClick={() => handleApply(id)} className='bg-blue-500 my-8 flex items-center gap-2 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded'>
+          <button onClick={() => handleApply(id)} className='bg-blue-600 my-8 flex items-center gap-2 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded'>
             Apply Now <MdArrowOutward />
           </button>
         </div>

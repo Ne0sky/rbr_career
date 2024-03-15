@@ -162,13 +162,13 @@ const Dashboard = () => {
                                     <div className='flex items-center gap-4'>
                                         <Link to={`/job/${job._id}`} target='_blank' className='bg-zinc-900 text-white py-1 px-2 w-24 text-center text-sm rounded-md'>See More</Link>
                                         <Link  to={`/admin/job_applicants/${job._id}`} 
-                                        target='_blank' className='bg-blue-500 text-whitez py-1 px-2 w-36 text-center text-sm rounded-md text-white'>Applicants</Link>
+                                        target='_blank' className='bg-blue-600 text-whitez py-1 px-2 w-36 text-center text-sm rounded-md text-white'>Applicants</Link>
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2 justify-center">
                                     <Link
                                         to={`/admin/edit_job`}
-                                        className="text-white rounded-md bg-blue-500 hover:bg-blue-700 flex items-center gap-1 px-2 py-1"
+                                        className="text-white rounded-md bg-blue-600 hover:bg-blue-700 flex items-center gap-1 px-2 py-1"
                                         state={{ job }}
                                     >
                                         <FaEdit /><p className='hidden md:block'>Edit</p>
