@@ -14,7 +14,7 @@ const JobCard = ({ id, title, location, date, type, apply }) => {
       </div>
       <div>
       <p className='bg-zinc-200 text-sm rounded-full p-2 text-center'>{type}</p>
-      <button className='bg-blue-500 my-2 font-semibold text-white rounded-full py-2 px-4 flex items-center gap-1 hover:bg-blue-800' onClick={() => apply(id)}>Apply <MdArrowOutward/></button>
+      <button className='bg-blue-600 my-2 font-semibold text-white rounded-full py-2 px-4 flex items-center gap-1 hover:bg-blue-800' onClick={() => apply(id)}>Apply <MdArrowOutward/></button>
       </div>
     </div>
   );

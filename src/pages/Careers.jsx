@@ -74,9 +74,9 @@ const Careers = () => {
 
       {/* Job openings section */}
       <div className='w-full  py-8 px-1 flex flex-col justify-center items-center'>
-        <p className='text-2xl font-semibold py-8 flex items-center gap-4'><PiSuitcaseSimpleBold/>Open Job Positions</p>
+        <p className='text-3xl font-semibold py-8 flex items-center gap-4'><PiSuitcaseSimpleBold/>Open Job Positions</p>
         {/* Search form */}
-        <div className="flex flex-col px-4 md:flex-row justify-center  pt-8 pb-4  w-full md:w-1/2 gap-4">
+        <div className="flex flex-row flex-wrap px-4 md:flex-row justify-center bg-gray-300 rounded-lg  p-8  w-screen md:w-1/2 gap-4">
           
           <div className='flex flex-col md:flex-row items-center gap-4 md:gap-0'>
           <input
@@ -84,31 +84,34 @@ const Careers = () => {
             placeholder="Title"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="p-2 border shadow-lg border-gray-400 rounded-md w-full md:w-1/3 md:rounded-l-full"
+            className="p-2 border  border-gray-400 rounded-md w-full md:w-1/3 md:rounded-l-full"
           />
             <input
               type="text"
               placeholder="Location"
               value={searchLocation}
               onChange={(e) => setSearchLocation(e.target.value)}
-              className="p-2 border shadow-lg border-gray-400 w-full md:w-1/3 md:rounded-none rounded-md  "
+              className="p-2 border  border-gray-400 w-full md:w-1/3 md:rounded-none rounded-md  "
             />
-            <select name="" id="" value={searchType} className='p-2.5 shadow-lg w-full md:w-1/3 border border-gray-400 md:rounded-none rounded-md' onChange={(e)=>setSearchType(e.target.value)}>
-              <option value="select type" className='text-gray-500 '>select type</option>
+            <select name="" id="" value={searchType} className='p-[9.5px] w-full md:w-1/3 border border-gray-400 md:rounded-none rounded-md' onChange={(e)=>setSearchType(e.target.value)}>
+              <option value="select type" className='text-gray-500 p-2'>select type</option>
               {
                 typeOptions.map((type, index) => (
                   <option key={index} value={type}>{type}</option>
                 ))
               }
             </select>
-            <button onClick={filterJobs} className="bg-blue-500 shadow-lg hover:bg-blue-700 text-white text-center px-4 py-2 md:rounded-r-full rounded-lg flex items-center justify-center gap-2"><p>Search</p> <IoSearch/></button>
+            <div className='flex'>
+            <button onClick={filterJobs} className="bg-blue-600  hover:bg-blue-700 text-white text-center px-4 py-2 md:rounded-none rounded-l-full flex items-center justify-center gap-2"><p>Search</p> <IoSearch/></button>
 
+            <button onClick={resetFilters} className="bg-zinc-700 hover:bg-zinc-900 text-white p-3 md:rounded-r-full rounded-r-full flex items-center justify-center gap-2"><span className='md:hidden'>Reset</span><GrPowerReset/></button>
+            </div>
           </div>
           
 
         </div>
         <div className='flex items-center pb-16 gap-4'>
-          <button onClick={resetFilters} className="bg-gray-500 hover:bg-gray-600 text-white  px-4 py-2 rounded-md flex items-center justify-center gap-2">Reset  <GrPowerReset/></button>
+          
           </div>
         {/* Job data table */}
         {isLoading ? (
