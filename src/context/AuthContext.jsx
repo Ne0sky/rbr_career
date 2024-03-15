@@ -41,7 +41,7 @@ export const AuthContextProvider = ({ children }) => {
                     // If no user data found, mark authentication as complete
                     dispatch({ type: 'SET_LOADING', payload: false });
                 }
-            }, 1000); // Simulating a 2-second delay for fetching user data
+            }, 500); // Simulate loading time
         } else {
             // If no token found, mark authentication as complete
             dispatch({ type: 'SET_LOADING', payload: false });

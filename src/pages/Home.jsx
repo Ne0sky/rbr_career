@@ -12,7 +12,7 @@ const Home = () => {
 
   return (
     <div className='font-main  flex flex-col px-4 mt-20  w-full  items-center overflow-x-hidden  justify-center '>
-      <div className='flex hero w-screen min-h-screen justify-center flex-col md:flex-row-reverse px-4 md:px-8 lg:px-32'>
+      <div className='flex  w-screen min-h-screen justify-center flex-col md:flex-row-reverse px-4 md:px-8 lg:px-32'>
       <div className='lg:w-1/2 w-full md:flex justify-center items-center '>
       <img className='w-80 md:w-80 lg:w-[450px] rounded-xl' src="/hero.png" alt="" />
       </div>

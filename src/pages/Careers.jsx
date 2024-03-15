@@ -18,7 +18,7 @@ const Careers = () => {
   const [searchLocation, setSearchLocation] = useState('');
   const [searchType, setSearchType] = useState('');
   const [page, setPage] = useState(0);
-  const [n] = useState(4); // Number of items per page
+  // const [n] = useState(4); // Number of items per page
 
   const [type, setType] = useState('Full Time');
 
@@ -26,11 +26,10 @@ const Careers = () => {
 
   useEffect(() => {
     if (jobs) {
-      const startIndex = page * n;
-      const endIndex = startIndex + n;
-      setFilterData(jobs.slice(startIndex, endIndex));
+    
+      setFilterData(jobs);
     }
-  }, [jobs, page, n]);
+  }, [jobs]);
 
   const filterJobs = () => {
     if (jobs) {
@@ -39,8 +38,9 @@ const Careers = () => {
         job.location.toLowerCase().includes(searchLocation.toLowerCase()) &&
         job.type.toLowerCase().includes(searchType.toLowerCase())
       );
-      setPage(0); 
-      setFilterData(filteredJobs.slice(0, n));
+      setFilterData(filteredJobs);
+      // setPage(0); 
+      // setFilterData(filteredJobs.slice(0, n));
     }
   };
 
@@ -48,8 +48,8 @@ const Careers = () => {
     setSearchQuery('');
     setSearchLocation('');
     setSearchType('');
-    setPage(0); // Reset page number when resetting filters
-    setFilterData(jobs.slice(0, n));
+    // setPage(0); // Reset page number when resetting filters
+    setFilterData(jobs);
   };
 
   const handleApply = (_id) => {
@@ -125,8 +125,8 @@ const Careers = () => {
           <p className="text-lg bg-neutral-200 p-4 rounded">No matching positions found.</p>
         )}
         {/* Pagination */}
-        <ReactPaginate
-          pageCount={jobs ? Math.ceil(jobs.length / n): 0} // Adjust as needed
+        {/* <ReactPaginate
+          pageCount={filterData ? Math.ceil(filterData.length / n): 0} // Adjust as needed
           pageRangeDisplayed={3} // Adjust as needed
           marginPagesDisplayed={1} // Adjust as needed
           activeClassName={"Pg_active"}
@@ -137,7 +137,7 @@ const Careers = () => {
           nextLabel={<IconContext.Provider value={{ size: "1.5em" }}><AiFillRightCircle /></IconContext.Provider>}
           breakClassName="break-me"
           
-        />
+        /> */}
       </div>
 
       <WhyJoin/>

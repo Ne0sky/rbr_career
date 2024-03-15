@@ -6,7 +6,7 @@ import { LuClock } from "react-icons/lu";
 
 const JobCard = ({ id, title, location, date, type, apply }) => {
   return (
-    <div className="job-card font-secondary w-full border-neutral-300 border flex my-4 items-center justify-between   rounded-lg p-8">
+    <div className="job-card font-secondary w-full border-neutral-400 border-b flex  items-center justify-between   p-8">
       <div>
       <h3 className='text-lg font-semibold flex items-center gap-4 pb-2'><PiSuitcaseSimpleBold size={28} className='p-1 bg-zinc-300 rounded'/>{title}</h3>
       <p className='text-sm flex items-center gap-2  md:text-base'><CiLocationOn/> {location}</p>
