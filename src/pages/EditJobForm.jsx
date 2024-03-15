@@ -17,22 +17,31 @@ const EditJobForm = (props) => {
     const [title, setTitle] = useState(job.title || '');
     const [responsibilities, setResponsibilities] = useState(job.description?.responsibilities || '');
     const [requirements, setRequirements] = useState(job.description?.requirements || '');
-    const [salary, setSalary] = useState(job.description?.salary || '');
+    const [stipend, setStipend] = useState(job.description?.salary || job.description?.stipend || '');
     const [location, setLocation] = useState(job.location || '');
     const [openings, setOpenings] = useState(job.openings || 0);
     const [type, setType] = useState(job.type || 'Full Time');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const updatedJobData = {
-            _id,
-            title,
-            description: { responsibilities, requirements, salary },
-            location,
-            openings,
-            type
-        };
+        let updatedJobData;
+        if(stipend === '' || stipend === 0) {
+             updatedJobData = {
+                _id,
+                title,
+                description: { responsibilities, requirements },
+                location,
+                type
+            }
+        }else{
+                 updatedJobData = {
+                    _id,
+                    title,
+                    description: { responsibilities, requirements, stipend },
+                    location,
+                    type
+                }
+        }
 
         try {
             await editJob(updatedJobData);
@@ -73,7 +82,7 @@ const EditJobForm = (props) => {
                     <div className='md:flex gap-4' >
                         <div>
                             <label htmlFor="salary" className="block text-lg mt-2 font-semibold">Salary</label>
-                            <input type="number" id="salary" value={salary} onChange={(e) => setSalary(e.target.value)} className="w-full border border-gray-500 rounded px-3 py-2" />
+                            <input type="number" id="salary" value={stipend} onChange={(e) => setStipend(e.target.value)} className="w-full border border-gray-500 rounded px-3 py-2" />
                         </div>
                         <div>
                             <label htmlFor="location" className="block text-lg mt-2 font-semibold">Location</label>
@@ -81,10 +90,7 @@ const EditJobForm = (props) => {
                         </div>
                     </div>
                     <div className='md:flex gap-4 items-center'>
-                        <div>
-                            <label htmlFor="openings" className="block text-lg mt-2 font-semibold">Openings</label>
-                            <input type="number" id="openings" value={openings} onChange={(e) => setOpenings(e.target.value)} className="w-full border border-gray-500 rounded px-3 py-2" />
-                        </div>
+                       
                         <div className='w-full md:w-1/2'>
                             <label htmlFor="type" className="block text-lg mt-2 font-semibold">Type</label>
                             <select

@@ -170,7 +170,7 @@ const Application = () => {
         "6th Semester",
         "7th Semester",
         "8th Semester",
-        "Passed Out"
+        "graduated"
     ];
 
     const degreeOptions = [
@@ -185,9 +185,11 @@ const Application = () => {
     ];
 
     const universityOptions = [
-        'University 1',
-        'University 2',
-        'University 3',
+        'Anna University',
+        'JNTU Hyderabad',
+        'JNTU Kakinada',
+        'JNTU Anantapur',
+        'vishwarya technical university',
         'Others'
     ];
 

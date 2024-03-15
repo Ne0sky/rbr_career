@@ -16,15 +16,16 @@ const CreateJobForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let formData;
         if(stipend === '' || stipend === 0) {
-        const formData = {
+        formData = {
             title,
             description: { responsibilities, requirements },
             location,
             type,
         };
     } else {
-        const formData = {
+            formData = {
             title,
             description: { responsibilities, requirements, stipend },
             location,
@@ -32,16 +33,16 @@ const CreateJobForm = () => {
         };
     }
             console.log(formData);
-        
+
             await createJob(formData);
+            console.log(error);
             if(!error){
             setTitle('');
             setResponsibilities('');
             setRequirements('');
-            setSalary('');
+            setStipend('');
             setLocation('');
             setType('');
-            setOpenings(0);
             navigate('/admin/dashboard');
             }
        
