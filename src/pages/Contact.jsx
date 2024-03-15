@@ -100,7 +100,7 @@ const Contact = () => {
         <label>Subject</label>
         <input type="text"
         className='block min-w-full py-2 placeholder:italic px-4 my-2 border border-zinc-600 rounded-lg '
-        placeholder='Full Name'
+        placeholder='Subject...'
         name="name"
         onChange={(e)=>setSubject(e.target.value)} 
         value={subject}
