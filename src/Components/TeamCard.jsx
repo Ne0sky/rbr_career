@@ -4,7 +4,7 @@ import React from 'react'
 const TeamCard = ({id, name, role, image, desc}) => {
     return (
         <div key={name.id} className='flex flex-col w-72 rounded-lg  items-center  shadow-lg shadow-neutral-300 gap-4'>
-        <div className='w-full h-32 py-4 bg-gradient-to-b from-blue-600 to-blue-400 rounded-t-lg  relative'>
+        <div className='w-full h-32 py-4 bg-gradient-to-b from-blue-950 to-blue-800 rounded-t-lg  relative'>
                 <img
                         className='w-32 h-32 border-2 shadow-xl border-white object-cover bg-blue-900 rounded-full absolute left-1/2 -bottom-28 transform -translate-x-1/2 -translate-y-1/2'
                         src={image}

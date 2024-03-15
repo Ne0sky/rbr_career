@@ -20,7 +20,10 @@ const Careers = () => {
   const [page, setPage] = useState(0);
   const [n] = useState(4); // Number of items per page
 
-  
+  const [type, setType] = useState('Full Time');
+
+  const typeOptions = ['Full Time',  'Internship'];
+
   useEffect(() => {
     if (jobs) {
       const startIndex = page * n;
@@ -73,35 +76,38 @@ const Careers = () => {
       <div className='w-full  py-8 px-1 flex flex-col justify-center items-center'>
         <p className='text-2xl font-semibold py-8 flex items-center gap-4'><PiSuitcaseSimpleBold/>Open Job Positions</p>
         {/* Search form */}
-        <div className="flex flex-col px-4 md:flex-row justify-center  pt-16 pb-4  w-full md:w-1/2 gap-4">
+        <div className="flex flex-col px-4 md:flex-row justify-center  pt-8 pb-4  w-full md:w-1/2 gap-4">
+          
+          <div className='flex flex-col md:flex-row items-center gap-4 md:gap-0'>
           <input
             type="text"
             placeholder="Title"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="p-2 border shadow-lg border-gray-300 rounded-md"
+            className="p-2 border shadow-lg border-gray-400 rounded-md w-full md:w-1/3 md:rounded-l-full"
           />
-          <div className='flex items-center gap-2'>
             <input
               type="text"
               placeholder="Location"
               value={searchLocation}
               onChange={(e) => setSearchLocation(e.target.value)}
-              className="p-2 border shadow-lg border-gray-300 w-1/2 rounded-md"
+              className="p-2 border shadow-lg border-gray-400 w-full md:w-1/3 md:rounded-none rounded-md  "
             />
-            <input
-              type="text"
-              placeholder="Type"
-              value={searchType}
-              onChange={(e) => setSearchType(e.target.value)}
-              className="p-2 border shadow-lg border-gray-300 w-1/2 rounded-md"
-            />
+            <select name="" id="" value={searchType} className='p-2.5 shadow-lg w-full md:w-1/3 border border-gray-400 md:rounded-none rounded-md' onChange={(e)=>setSearchType(e.target.value)}>
+              <option value="select type" className='text-gray-500 '>select type</option>
+              {
+                typeOptions.map((type, index) => (
+                  <option key={index} value={type}>{type}</option>
+                ))
+              }
+            </select>
+            <button onClick={filterJobs} className="bg-blue-500 shadow-lg hover:bg-blue-700 text-white text-center px-4 py-2 md:rounded-r-full rounded-lg flex items-center justify-center gap-2"><p>Search</p> <IoSearch/></button>
+
           </div>
           
-          
+
         </div>
         <div className='flex items-center pb-16 gap-4'>
-        <button onClick={filterJobs} className="bg-blue-500 hover:bg-blue-700 text-white text-center px-4 py-2 rounded-md flex items-center justify-center gap-2"><p>Search</p> <IoSearch/></button>
           <button onClick={resetFilters} className="bg-gray-500 hover:bg-gray-600 text-white  px-4 py-2 rounded-md flex items-center justify-center gap-2">Reset  <GrPowerReset/></button>
           </div>
         {/* Job data table */}
