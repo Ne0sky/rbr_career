@@ -7,6 +7,7 @@ import { MdArrowOutward } from "react-icons/md";
 import TeamCard from '../Components/TeamCard';
 import CountUp from 'react-countup';
 import Toolslist from '../Components/Toolslist';
+import ScrollToTop from '../utils/ScrollToTop';
 const Home = () => {
 
 
@@ -93,7 +94,7 @@ const Home = () => {
           ))}
         </div>
       </div>
-
+        <ScrollToTop />    
     </div>
   );
 }

@@ -9,6 +9,7 @@ import { GrPowerReset } from "react-icons/gr";
 import { IoSearch } from "react-icons/io5";
 import WhyJoin from '../Components/WhyJoin';
 import { PiSuitcaseSimpleBold } from "react-icons/pi";
+import ScrollToTop from '../utils/ScrollToTop';
 
 
 const Careers = () => {
@@ -144,7 +145,7 @@ const Careers = () => {
       </div>
 
       <WhyJoin/>
-
+        <ScrollToTop />
     </div>
   );
 }
